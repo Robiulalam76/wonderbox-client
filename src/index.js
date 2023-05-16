@@ -3,11 +3,32 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const theme = {
+  dialog: {
+    styles: {
+      sizes: {
+        xs: {
+          width: "w-full",
+          minWidth: "min-w-80",
+          maxWidth: "max-w-[96%] md:max-w-[500px]",
+        },
+        md: {
+          width: "w-full",
+          minWidth: "min-w-80",
+          maxWidth: "max-w-[96%] md:max-w-[600px]",
+        },
+      },
+    },
+  },
+};
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider value={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
