@@ -51,6 +51,16 @@ function NavList() {
                     My Orders
                 </Link>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <Link to="/login" className="flex items-center hover:text-blue-500 transition-colors">
+                    Login
+                </Link>
+            </Typography>
         </ul>
     );
 }
