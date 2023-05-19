@@ -10,9 +10,10 @@ import {
     Tab,
     TabPanel,
 } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../ContextAPI/AuthProvider";
 
 const data = [
     {
@@ -26,6 +27,7 @@ const data = [
 ];
 
 const AddCard = () => {
+    const { user } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [tab, setTab] = useState("Wallet")
     const navigate = useNavigate()
@@ -39,7 +41,7 @@ const AddCard = () => {
         data["features"] = [data.features]
         data["type"] = tab
 
-        console.log(data);
+        // console.log(data);
 
 
         fetch(`http://localhost:5000/api/product/add`, {

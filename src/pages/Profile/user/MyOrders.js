@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useContext, useEffect, useState, } from 'react';
 import QRCode from 'react-qr-code';
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { ArrowDownTrayIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -16,13 +16,15 @@ import {
     Input,
 } from "@material-tailwind/react";
 import OrderTable from '../../../components/tables/OrderTable';
+import { AuthContext } from '../../../ContextAPI/AuthProvider';
 
 const MyOrders = () => {
+    const { user } = useContext(AuthContext)
     const [products, setProducts] = useState([])
     const [productData, setProductData] = useState(null)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/card/getcards/6461e98f001ed5154abd5210`)
+        fetch(`http://localhost:5000/api/card/getcards/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.data)

@@ -11,23 +11,30 @@ export default function Login() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-
+        console.log(data);
         fetch(`http://localhost:5000/api/user/login`, {
-            method: "POST"
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                if (data.token) {
+                    localStorage.setItem("wonderboxtoken", data.token)
+                }
             })
     }
 
     return (
-        <Card color="transparent" shadow={false} className="w-96 mx-auto">
+        <Card color="transparent" shadow={false} className="w-96 mx-auto mt-8">
             <Typography variant="h4" color="blue-gray">
-                Sign Up
+                Login
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-                Enter your details to register.
+                Enter your Email and Password to Login.
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                 <div className="mb-4 flex flex-col gap-6">
@@ -56,8 +63,8 @@ export default function Login() {
                     }
                     containerProps={{ className: "-ml-2.5" }}
                 />
-                <Button className="mt-6" fullWidth>
-                    Register
+                <Button type="submit" className="mt-6" fullWidth>
+                    Login
                 </Button>
                 <Typography color="gray" className="mt-4 text-center font-normal">
                     Already have an account?{" "}

@@ -4,7 +4,6 @@ import {
     Typography,
     CardBody,
 } from "@material-tailwind/react";
-import OrderTable from '../../../components/tables/OrderTable';
 import ProductTable from '../../../components/tables/ProductTable';
 
 const MyProducts = () => {

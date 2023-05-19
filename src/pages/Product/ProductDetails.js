@@ -81,7 +81,7 @@ const ProductDetails = () => {
 
     }
     return (
-        <Card className="flex-row w-full max-w-[48rem] px-4">
+        <Card className="flex-row w-full max-w-[1440px] mx-auto px-4">
             <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
                 <img
                     src={product?.image}

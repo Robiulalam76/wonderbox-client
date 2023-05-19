@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@material-tailwind/react';
+import AuthProvider from './ContextAPI/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = {
@@ -27,7 +28,9 @@ const theme = {
 root.render(
   <React.StrictMode>
     <ThemeProvider value={theme}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
