@@ -7,9 +7,9 @@ import Product from '../Product/Product';
 const Home = () => {
     return (
         <section className=''>
-            <div className='bg-white'>
+            <div className='bg-white mt-4'>
+                <img className='w-full h-44' src="https://cse-lidlentzheim.com/img/cms/wonderbox%20baniere.jpg" alt="" />
                 <div className='max-w-[1440px] mx-auto px-4 pt-8'>
-                    {/* <LatestProducts /> */}
                     <Product />
                     <ProductRequirements />
                 </div>

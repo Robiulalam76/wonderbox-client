@@ -7,7 +7,8 @@ import ProductDetails from '../pages/Product/ProductDetails';
 import MyOrders from '../pages/Profile/user/MyOrders';
 import AddCard from '../pages/Profile/seller/AddCard';
 import MyProducts from '../pages/Profile/seller/MyProducts';
-import Login from '../pages/Login/Login';
+import Login from '../pages/Login_Register/Login';
+import Register from '../pages/Login_Register/Register';
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
             { path: '/store/add-card', element: <AddCard></AddCard> },
             { path: '/store/products', element: <MyProducts></MyProducts> },
             { path: '/login', element: <Login></Login> },
+            { path: '/register', element: <Register></Register> },
         ]
     },
 ])

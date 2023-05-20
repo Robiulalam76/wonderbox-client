@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import love from '../../assets/icons/love.png'
 import cart from '../../assets/icons/cart.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../ContextAPI/AuthProvider';
+import ProfileDrawer from '../drawers/ProfileDrawer';
+import { useDispatch } from 'react-redux';
+import { setOpenProfileDrawer } from '../../Slices/controllerSlice';
 const Navber = () => {
-
+    const { user } = useContext(AuthContext)
     const [open, setOpen] = useState(false)
+    const dispatch = useDispatch()
 
     let navberRef = useRef();
     useEffect(() => {
@@ -21,7 +26,7 @@ const Navber = () => {
     return (
         <nav ref={navberRef} className='bg-white py-4 uppercase border-b'>
             <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 md:px-8 max-w-[1440px] mx-auto'>
-                <div className='flex-grow'>
+                <div className='flex-grow uppercase font-bold'>
                     <Link to='/'>Wonderbox</Link>
                 </div>
                 {/* <div className='hidden lg:block'>
@@ -68,25 +73,30 @@ const Navber = () => {
                         </div>
                     </div>
                 </div>
-                {/* {
-                    userInfo ? <div className='flex items-center gap-2'>
-                        <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name?.slice(0, 12)}</h1>
+                {
+                    user ? <div onClick={() => dispatch(setOpenProfileDrawer(true))} className='flex items-center gap-2'>
+                        <h1 className='font-bold text-blue-900 hidden sm:block'>{user?.name?.slice(0, 12)}</h1>
                         <div
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
-                            <img className='w-8 h-8 object-cover' src="https://cdn-icons-png.flaticon.com/512/3033/3033143.png" alt="" />
+                            {
+                                user?.image ? <img className='w-10 h-10 object-cover rounded-full' src={user?.image} alt="" />
+                                    :
+                                    <span>{user?.name?.slice(0, 1)} </span>
+                            }
                         </div>
-                    </div> */}
-                {/* : */}
-                <div className='hidden lg:block lg:flex justify-between items-center gap-6'>
-                    <Link to='/login' className='w-36 h-10 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
-                        <h1 className='text-white font-semibold'>LOG IN</h1>
-                    </Link>
-                    <Link to='/register' className='w-36 h-10 border border-primary hover:bg-gray-300 duration-300 flex justify-center items-center rounded'>
-                        <h1 className='text-primary font-semibold'>REGISTER</h1>
-                    </Link>
-                </div>
-                {/* } */}
-                {/* -----------toggler button----------- */}
+                    </div>
+                        :
+                        <div className='hidden lg:block lg:flex justify-between items-center gap-6'>
+                            <Link to='/login' className='w-36 h-10 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
+                                <h1 className='text-white font-semibold'>LOG IN</h1>
+                            </Link>
+                            <Link to='/register' className='w-36 h-10 border border-primary hover:bg-gray-300 duration-300 flex justify-center items-center rounded'>
+                                <h1 className='text-primary font-semibold'>REGISTER</h1>
+                            </Link>
+                        </div>
+                }
+
+
                 <div onClick={() => setOpen(!open)} className="w-10 lg:hidden text-blue-600">
                     {
                         open ? <span>
@@ -98,7 +108,6 @@ const Navber = () => {
                             </span>
                     }
                 </div>
-                {/* -----------toggler button end----------- */}
 
             </div>
             <div className={`absolute z-50 duration-300 border-r mt-[17px] lg:hidden flex flex-col items-start w-72 min-h-screen bg-white px-4 py-4
@@ -138,9 +147,8 @@ const Navber = () => {
                 </div>
             </div>
 
-            {/* <AddCartItemsDrawer />
-            <WishlistDrawer />
-            <UserProfileSidebar reFetch={setUserInfo} /> */}
+            <ProfileDrawer />
+
         </nav>
     );
 };

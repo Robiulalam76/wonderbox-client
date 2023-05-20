@@ -1,10 +1,15 @@
+import { getAuth, signInWithPopup, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
+import app from '../Firebase/Firebase.config';
 
 export const AuthContext = createContext({})
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true);
     const token = localStorage.getItem('wonderboxtoken')
-    console.log(user);
+    const auth = getAuth(app);
+
+    // console.log(user);
     const userRefetch = () => {
         fetch(`http://localhost:5000/api/user/me`, {
             headers: {
@@ -21,10 +26,27 @@ const AuthProvider = ({ children }) => {
     }, [token]);
 
 
+    // signup with google
+    const signupWithGoogle = (provider) => {
+        return signInWithPopup(auth, provider)
+    }
+
+    // user Logout
+    const logout = () => {
+        setLoading(true)
+        localStorage.removeItem('wonderboxtoken')
+        return signOut(auth)
+    }
+
+
+
     const authInfo = {
         user,
         userRefetch,
-        setUser
+        setUser,
+        signupWithGoogle,
+        logout,
+        loading
     }
     return (
         <AuthContext.Provider value={authInfo}>
