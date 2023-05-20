@@ -11,8 +11,11 @@ module.exports = withMT({
     extend: {
       colors: {
         primary: '#0029FF',
-        secondary: '#F3F3F3',
+        secondary: '#F5F5F5',
         darkPrimary: '#0624c2'
+      },
+      maxWidth: {
+        'primary': '1480px',
       }
     },
   },

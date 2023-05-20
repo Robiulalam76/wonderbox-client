@@ -25,18 +25,18 @@ const Navber = () => {
     });
     return (
         <nav ref={navberRef} className='bg-white py-4 uppercase border-b'>
-            <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 md:px-8 max-w-[1440px] mx-auto'>
+            <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 max-w-primary mx-auto'>
                 <div className='flex-grow uppercase font-bold'>
                     <Link to='/'>Wonderbox</Link>
                 </div>
-                {/* <div className='hidden lg:block'>
+                <div className='hidden lg:block'>
                     <Link to='/home' className='text-black hover:text-primary duration-100 font-semibold'>Home</Link>
-                </div> */}
+                </div>
                 {/* <div className='hidden lg:block'>
                     <Link to='/how-it-works' className='text-black hover:text-primary duration-100 font-semibold'>How it works</Link>
                 </div> */}
                 <div className='hidden lg:block'>
-                    <Link to='/my-orders' className='text-black hover:text-primary duration-100 font-semibold'>My Orders</Link>
+                    <Link to='/dashboard' className='text-black hover:text-primary duration-100 font-semibold'>Dashboard</Link>
                 </div>
                 <div className='hidden lg:block'>
                     <Link to='/store/add-card' className='text-black hover:text-primary duration-100 font-semibold'>Add Product</Link>
