@@ -43,8 +43,8 @@ export default class ProductImageCorousel extends Component {
                 <Slider ref={c => (this.slider = c)} {...settings}>
                     {
                         this.props?.images?.map((img, i) => (
-                            <div className="relative flex justify-center items-center">
-                                <img key={i} draggable="false" className='w-full h-48 object-cover' src={img} alt="" onLoad={this.handleImageLoad} onPlay={lazy} />
+                            <div className="relative flex justify-center items-center h-full">
+                                <img key={i} draggable="false" className='w-full h-full object-cover' src={img} alt="" onLoad={this.handleImageLoad} onPlay={lazy} />
 
                                 {
                                     loading && <div className="flex justify-center items-center w-full h-full bg-gray-100 text-black absolute top-0 text-center">

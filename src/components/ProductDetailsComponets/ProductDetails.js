@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -21,6 +21,11 @@ import ProductImages from './ProductImages';
 
 import bluer from "../../assets/icons/blue-right.png"
 import ProductCard from '../cards/ProductCard';
+import ProductData from '../Product-View-Components/ProductData';
+import BuyerReview from '../buyer-reviews/BuyerReview';
+import CompanyProfile from '../Company-Profile-Components/company-profile/CompanyProfile';
+
+const items = ["Product Details", "Company profile", "Buyer Reviews"]
 
 const ProductDetails = () => {
     const { image } = useSelector((state) => state.productSlice)
@@ -29,7 +34,9 @@ const ProductDetails = () => {
     const [unique, setUnique] = useState("");
     const navigate = useNavigate()
 
+    const [selectedData, setSelectedData] = useState("Product Details")
     const [products, setProducts] = useState([])
+
     useEffect(() => {
         fetch(`http://localhost:5000/api/product/show/all`)
             .then(res => res.json())
@@ -55,13 +62,8 @@ const ProductDetails = () => {
 
     function generateUniqueCode(product) {
         handleQrCode(product)
-        // Compute the SHA-256 hash of the product ID
         const hash = SHA256(product?.productId).toString();
-
-        // Encode the hash value using Base64
         const encoded = btoa(hash);
-
-        // Return the resulting unique code
         setUnique(encoded);
     }
 
@@ -103,7 +105,7 @@ const ProductDetails = () => {
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8 w-full'>
                 <ProductImages images={product?.images} />
 
-                <div className="col-span-1 grid grid-cols-1 gap-2 p-3 h-fit max-w-full">
+                <div className="col-span-3 md:col-span-1 grid grid-cols-1 gap-2 p-3 h-fit max-w-full">
                     <h1 className="flex-grow font-bold text-gray-800 md:text-3xl">{product?.title}</h1>
                     <div className="flex items-center gap-1">
                         <Rating value={5} readonly />
@@ -125,14 +127,14 @@ const ProductDetails = () => {
                         <Typography className="font-medium text-gray-600 mt-2">{product?.description.slice(0, 280) + "..."}<a href="#" className='underline text-blue-600' >Read More</a></Typography>
                     </div>
 
-                    <Button onClick={() => generateUniqueCode(product)} variant="green"
-                        className="rounded-none mt-8">
+                    <Button onClick={() => generateUniqueCode(product)} color="green"
+                        className="rounded-none mt-8 h-12">
                         Buy Now
                     </Button>
                 </div>
 
-                <div className="col-span-1 grid grid-cols-1 gap-2 p-3 h-full max-w-full border rounded-md">
-                    <div className="col-span-1 grid grid-cols-1 gap-2 p-3 h-fit">
+                <div className="col-span-3 md:col-span-1 grid grid-cols-1 gap-2 p-3 h-full border rounded-md w-full">
+                    <div className="grid grid-cols-1 gap-2 p-3 h-fit">
 
                         <Typography className="flex-grow font-bold text-pink-600 text-3xl">${product?.price}</Typography>
                         <Typography>Valid until 08/31/2026</Typography>
@@ -152,18 +154,6 @@ const ProductDetails = () => {
                             <div className='flex items-start gap-2 text-gray-700'>
                                 <img className='w-4' src={bluer} alt="" />
                                 <Typography>Gift box - delivered in 2 to 3 working days</Typography>
-                            </div>
-                        </div>
-
-
-                        <div className='flex items-center gap-2'>
-                            <Typography>Quantity: </Typography>
-                            <div className='w-fit' >
-                                <Select className='h-8'>
-                                    {
-                                        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number, i) => <Option>{number}</Option>)
-                                    }
-                                </Select>
                             </div>
                         </div>
 
@@ -191,6 +181,24 @@ const ProductDetails = () => {
                 </div>
             </div>
 
+
+            <div>
+                <div className='grid grid-cols-3 mt-8 mb-4' >
+                    {items.map((item, i) => (
+                        <Button key={i} onClick={() => setSelectedData(item)}
+                            className={`w-full rounded-none shadow-none hover:shadow-none h-12
+                                ${selectedData === item ? "bg-primary" : "bg-blue-gray-50 text-black"}`} >
+                            {item}
+                        </Button>
+                    ))}
+                </div>
+
+
+                {selectedData === "Product Details" && <ProductData />}
+                {selectedData === "Company profile" && <CompanyProfile product={product} />}
+                {selectedData === "Buyer Reviews" && <BuyerReview />}
+            </div>
+
             <div className=' mt-16'>
                 <Typography className="text-xl">You will like also</Typography>
                 <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4'>
@@ -201,6 +209,8 @@ const ProductDetails = () => {
             </div>
 
 
+
+            {/* // ========================modal======================= */}
             <Dialog open={open} handler={() => setOpen(false)} size='xxl' >
                 <DialogHeader>
                     <Typography variant="h5" color="blue-gray">

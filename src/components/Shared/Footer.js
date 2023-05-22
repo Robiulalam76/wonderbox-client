@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const SITEMAP = [
     {
@@ -23,34 +24,89 @@ const currentYear = new Date().getFullYear();
 
 export default function Footer() {
     return (
-        <footer className="relative w-full">
-            <div className="mx-auto w-full max-w-7xl px-8">
-                <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
-                    {SITEMAP.map(({ title, links }, key) => (
-                        <div key={key} className="w-full">
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="mb-4 font-bold uppercase opacity-50"
-                            >
-                                {title}
-                            </Typography>
-                            <ul className="space-y-1">
-                                {links.map((link, key) => (
-                                    <Typography key={key} as="li" color="blue-gray" className="font-normal">
-                                        <a
-                                            href="#"
-                                            className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                                        >
-                                            {link}
-                                        </a>
-                                    </Typography>
-                                ))}
-                            </ul>
+        <footer className="relative w-full bg-blue-gray-50 mt-16">
+            <div className="max-w-primary px-4 mx-auto pt-10">
+                <div className='grid md:grid-cols-3 lg:grid-cols-7 gap-4 gap-y-6 md:gap-y-16 mb-8'>
+                    <div className='lg:col-span-2'>
+                        <img className='w-20 mb-6 mx-auto md:mx-0' src="https://w7.pngwing.com/pngs/266/755/png-transparent-webflow-blue-w-logo-icon-tech-companies.png" alt="footerImage" />
+                        <p className='text-gray-500 text-center md:text-left mb-4'>Enim enim integer quam volutpat, a ut fames. Ornare sem egestas tincidunt vitae at nisi ultricies arcu.</p>
+
+                        <h1 className='text-black font-bold text-xl text-center md:text-left mb-4'>Follow Us</h1>
+                        {/* <div className='flex justify-center md:justify-start items-center gap-4'>
+                                    <a target='_blank' href="">
+                                        <img className='w-3' src={facebook} alt="footerImage" />
+                                    </a>
+                                    <a target='_blank' href="">
+                                        <img className='w-5' src={instagram} alt="footerImage" />
+                                    </a>
+                                    <a target='_blank' href="">
+                                        <img className='w-5' src={linkedin} alt="footerImage" />
+                                    </a>
+                                    <a target='_blank' href="">
+                                        <img className='w-5' src={youtube} alt="footerImage" />
+                                    </a>
+                                    <a target='_blank' href="">
+                                        <img className='w-5' src={twitter} alt="footerImage" />
+                                    </a>
+                                </div> */}
+                    </div>
+
+                    <div>
+                        <h1 className='text-black font-bold text-center md:text-left mb-4 md:mb-6'>Customer Services</h1>
+
+                        <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
+                            <Link to="/customer-support" className='hover:text-primary duration-150' >Help Center</Link>
+                            <p className='hover:text-primary duration-150' >Report Abuse</p>
+                            <p className='hover:text-primary duration-150' >Open Case</p>
+                            <p className='hover:text-primary duration-150' >Policies And Rules</p>
+                            <p className='hover:text-primary duration-150' >Get Paid for Your Feedback</p>
                         </div>
-                    ))}
+                    </div>
+
+                    <div>
+                        <h1 className='text-black font-bold text-center md:text-left mb-4 md:mb-6'>About US</h1>
+
+                        <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
+                            <Link to="/about-us" className='hover:text-primary duration-150' >About</Link>
+                            <Link to="/contact" className='hover:text-primary duration-150' >Contact us</Link>
+                            <p className='hover:text-primary duration-150' >Sitemap</p>
+                            <p className='hover:text-primary duration-150' >Blog</p>
+                            <p className='hover:text-primary duration-150' >Notice</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h1 className='text-black font-bold text-center md:text-left mb-4 md:mb-6'>Source</h1>
+
+                        <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
+                            <p className='hover:text-primary duration-150' >Resources</p>
+                            <p className='hover:text-primary duration-150' >All Categories</p>
+                            <p className='hover:text-primary duration-150' >Request for Quoteation</p>
+                            <p className='hover:text-primary duration-150' >Ready to Ship</p>
+                            <p className='hover:text-primary duration-150' >Buyer Partners</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h1 className='text-black font-bold text-center md:text-left mb-4 md:mb-6'>Sell</h1>
+
+                        <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
+                            <p className='hover:text-primary duration-150' >Supplier memberships</p>
+                            <p className='hover:text-primary duration-150' >Learning Center</p>
+                            <p className='hover:text-primary duration-150' >Partner Program</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 className='text-black font-bold text-center md:text-left mb-4 md:mb-6'>Trade Services</h1>
+
+                        <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
+                            <p className='hover:text-primary duration-150' >Trade Assurance</p>
+                            <p className='hover:text-primary duration-150' >Business Identity</p>
+                            <p className='hover:text-primary duration-150' >Logistics Services</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
+                <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-300 py-4 md:flex-row md:justify-between">
                     <Typography
                         variant="small"
                         className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
