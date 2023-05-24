@@ -67,7 +67,7 @@ const RecipientRegister = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(handleVerify)}
-                className='w-full md:w-[800px] mx-auto bg-white h-full p-6'>
+                className='w-full md:w-[800px] mx-auto bg-white h-full md:p-6'>
                 <Typography className="text-xl text-center"><strong>Register</strong> your gift</Typography>
                 <hr />
                 <div className='grid grid-cols-1 gap-4 mt-4'>
@@ -76,7 +76,7 @@ const RecipientRegister = () => {
                         <Input {...register("checkNumber", { required: true })}
                             size='md' type='number' name='checkNumber' placeholder='Please Eneter 12 Digit' className={`rounded-sm ${errors.checkNumber && "outline outline-pink-500"}`} />
                     </div>
-                    <div className='grid grid-cols-2 items-end gap-4'>
+                    <div className='grid md:grid-cols-2 items-end gap-4'>
                         <div className='flex flex-col'>
                             <Typography className='text-left text-sm'>Security code**</Typography>
                             <Input {...register("securityCode", { required: true })}
@@ -102,16 +102,16 @@ const RecipientRegister = () => {
 
 
             {/* ----------------modal------------------ */}
-            <Dialog open={open} handler={() => setOpen(false)} size='xl' className='h-[800px] relative' >
-
-                <img className='h-[600px]' src={img} alt="" />
+            <Dialog open={open} handler={() => setOpen(false)} size='xxl' className='h-[800px] relative' >
                 <Button onClick={() => setOpen(false)}
-                    className='absolute top-0 right-0 rounded-none bg-pink-500 text-white'>
+                    className='rounded-none bg-pink-500 text-white w-fit mx-auto mr-0'>
                     close
                 </Button>
+
+                <img className='md:h-[600px] object-cover' src={img} alt="" />
             </Dialog>
 
-            <Dialog open={resultModal}>
+            <Dialog open={resultModal} >
                 <DialogBody divider>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <img className='w-28 mx-auto' src={resultModal?.status === "success" ? img1 : img2} alt="" />

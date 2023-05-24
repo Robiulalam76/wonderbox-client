@@ -45,7 +45,7 @@ const SendInquiry = ({ product }) => {
 
         console.log(newMessage);
 
-        fetch(`http://localhost:5055/api/storemessage`, {
+        fetch(`http://localhost:5000/api/storemessage`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -65,7 +65,7 @@ const SendInquiry = ({ product }) => {
             senderId: user?._id,
             receiverId: store?._id
         }
-        fetch(`http://localhost:5055/api/storechat`, {
+        fetch(`http://localhost:5000/api/storechat`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -32,13 +32,14 @@ const MyOrders = () => {
     const [products, setProducts] = useState([]); // Your array of products goes here
     const itemsPerPage = 10; // Number of products to display per page
 
+
     useEffect(() => {
-        fetch(`http://localhost:5000/api/card/getcards/${user?._id}`)
+        fetch(`http://localhost:5000/api/card/getcards/${user?._id}/${selectType}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.data)
             })
-    }, [])
+    }, [selectType, setSelectType])
 
 
     const handlePreviousPage = () => {
@@ -144,7 +145,7 @@ const MyOrders = () => {
                 </thead>
                 <tbody className="overflow-scroll px-0" >
                     {
-                        productsToShow?.map((product, i) => <OrderTable data={product} />)
+                        productsToShow?.map((product, i) => <OrderTable key={i} data={product} />)
                     }
                 </tbody>
             </table>
