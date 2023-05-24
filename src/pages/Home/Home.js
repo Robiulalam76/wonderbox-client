@@ -1,5 +1,4 @@
 import React from 'react';
-import LatestProducts from '../../components/HomeComponents/LatestProducts/LatestProducts';
 import FooterInbox from '../../components/HomeComponents/FooterInbox/FooterInbox';
 import ProductRequirements from '../../components/HomeComponents/ProductRequirements/ProductRequirements';
 import Product from '../Product/Product';

@@ -1,23 +1,27 @@
 import React from 'react';
 import { routes } from '../../utils/routesData';
 import { Link } from 'react-router-dom';
-import { Button, Drawer, Typography } from '@material-tailwind/react';
+import { Button, Typography } from '@material-tailwind/react';
 
 const DashboardDrawerData = () => {
     return (
         <div className='grid grid-cols-1 gap-4 w-full px-4 mt-6 mx-auto relative' >
-            <Typography className="font-bold text-xl text-black" >WONDERBOX</Typography>
+            <Link to="/" className='flex items-center justify-start px-2' >
+                <Typography className="font-bold text-xl text-black" >WONDERBOX</Typography>
+            </Link>
+            <div className='mt-12'>
 
-            {
-                routes?.map(route => (
-                    <Link to={`/${route?.url}`} >
-                        <Button className='flex items-center gap-2 py-2 rounded-sm bg-white text-black shadow-none hover:shadow-none w-full hover:bg-primary hover:text-white' >
-                            {route?.img}
-                            <Typography className="text-sm">{route.title}</Typography>
-                        </Button>
-                    </Link>
-                ))
-            }
+                {
+                    routes?.map(route => (
+                        <Link to={`/${route?.url}`} >
+                            <Button className='flex items-center justify-start px-2 gap-2 py-3 rounded-sm bg-white text-black shadow-none hover:shadow-none w-full hover:bg-primary hover:text-white' >
+                                {route?.img}
+                                <Typography className="text-sm">{route.title}</Typography>
+                            </Button>
+                        </Link>
+                    ))
+                }
+            </div>
 
             <Button className='text-white bg-primary w-full flex justify-center items-center gap-2 py-2 rounded-sm' >
                 <svg width="30" height="24" viewBox="0 0 30 34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

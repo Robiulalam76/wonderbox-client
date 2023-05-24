@@ -13,6 +13,7 @@ import ProductDetails from '../components/ProductDetailsComponets/ProductDetails
 import MyAccount from '../pages/DashboardPages/MyAccount';
 import MyOrders from '../pages/DashboardPages/MyOrders';
 import RecipientRegister from '../pages/DashboardPages/RecipientRegister';
+import SellerOrders from '../pages/DashboardPages/SellerOrders';
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/my-account', element: <MyAccount /> },
             { path: '/dashboard/orders', element: <MyOrders /> },
             { path: '/dashboard/recipient', element: <RecipientRegister /> },
+            { path: '/dashboard/seller-orders', element: <SellerOrders /> },
         ]
     }
 ])

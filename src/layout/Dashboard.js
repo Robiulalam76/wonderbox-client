@@ -11,7 +11,7 @@ const Dashboard = () => {
                 <DashboardDrawer open={open} />
                 <div className='flex-grow'>
                     <DashboardNavber open={open} setOpen={setOpen} />
-                    <div className='px-4 lg:px-0 py-4 h-full overflow-y-auto'>
+                    <div className='px-4 py-4 h-full w-full overflow-y-auto'>
                         <Outlet />
                     </div>
                 </div>
