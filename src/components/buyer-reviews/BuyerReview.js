@@ -3,8 +3,10 @@ import stars from '../../assets/icons/stars.png'
 import img1 from '../../assets/icons/flag.png'
 // import star from '../../assets/icons/star.png'
 import starG from '../../assets/icons/star-gray.png'
-import { Button, Progress, Radio, Rating, Typography } from '@material-tailwind/react';
+import { Button, IconButton, Progress, Radio, Rating, Typography } from '@material-tailwind/react';
 import SendReview from './SendReview';
+import UpdateReviewModal from '../Modals/UpdateReviewModal';
+import DeleteModal from '../Modals/DeleteModal';
 
 const star = <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" fill="#f3da35"></path> </svg>
 
@@ -15,14 +17,22 @@ const BuyerReview = ({ productId }) => {
     const [positive, setPositive] = useState(false);
     const [nagetive, setNageive] = useState(false);
 
-    const refetch = () => {
-        fetch(`http://localhost:5000/api/review/${productId}`)
-            .then(res => res.json())
-            .then(data => {
-                setReviews(data);
-                handleAllClick()
-            })
+    const [reviewData, setReviewData] = useState(null);
+    const [reviewDelete, setReviewDelete] = useState(false);
+    const [reviewId, setReviewId] = useState("");
+
+
+    const handleReviewdelete = (id) => {
+        setReviewId(id)
+        setReviewDelete(true)
     }
+
+    const handleAllClick = () => {
+        setShowAll(true)
+        setNageive(false)
+        setPositive(false)
+        setFilteredReviews(reviews?.reviews);
+    };
 
 
     const handlePositiveClick = () => {
@@ -41,12 +51,16 @@ const BuyerReview = ({ productId }) => {
         setShowAll(false)
     };
 
-    const handleAllClick = () => {
-        setShowAll(true)
-        setNageive(false)
-        setPositive(false)
-        setFilteredReviews(reviews?.reviews);
-    };
+
+    const refetch = () => {
+        fetch(`http://localhost:5000/api/review/${productId}`)
+            .then(res => res.json())
+            .then(data => {
+                setReviews(data);
+                setFilteredReviews(data?.reviews);
+            })
+    }
+
 
     useEffect(() => {
         refetch()
@@ -138,51 +152,71 @@ const BuyerReview = ({ productId }) => {
                 </div>
 
 
-                <div className='grid grid-cols-1 gap-6 mt-6'>
+                <div className='grid lg:grid-cols-2 gap-6 mt-6'>
+                    <div className='grid grid-cols-1 gap-6'>
 
-                    {
-                        filteredReviews && filteredReviews.map((review, i) => (
-                            <div className='rounded-md border'>
-                                <div className='flex justify-between items-center border-b p-2 md:py-4 md:px-6'>
-                                    <div class="flex justify-start items-center flex-row space-x-2.5">
-                                        <div>
-                                            <img className='w-12 h-12 rounded-full object-cover' src={review?.reviewerId?.image} alt={review?.reviewerId?.name} />
+                        {
+                            filteredReviews && filteredReviews.map((review, i) => (
+                                <div key={i} className='rounded-md border'>
+                                    <div className='flex justify-between items-center border-b p-2 md:py-4 md:px-6'>
+                                        <div class="flex justify-start items-center flex-row space-x-2.5">
+                                            <div>
+                                                <img className='w-12 h-12 rounded-full object-cover' src={review?.reviewerId?.image} alt={review?.reviewerId?.name} />
+                                            </div>
+                                            <div class="flex flex-col justify-start items-start space-y-2">
+                                                <p class="text-base font-medium leading-none text-gray-800">
+                                                    {review?.reviewerId?.name}
+                                                </p>
+                                                <p class="text-sm leading-none text-gray-600">{new Date(review?.createdAt).toLocaleDateString('en-GB')}</p>
+                                            </div>
                                         </div>
-                                        <div class="flex flex-col justify-start items-start space-y-2">
-                                            <p class="text-base font-medium leading-none text-gray-800">
-                                                {review?.reviewerId?.name}
-                                            </p>
-                                            <p class="text-sm leading-none text-gray-600">{new Date(review?.createdAt).toLocaleDateString('en-GB')}</p>
+                                        <div className="flex items-center gap-1">
+                                            <Rating value={review?.rating} readonly />
+                                            <Typography color="blue-gray" className="mt-1">
+                                                ({review?.rating}) Rating
+                                            </Typography>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-1">
-                                        <Rating value={review?.rating} readonly />
-                                        <Typography color="blue-gray" className="mt-1">
-                                            ({review?.rating}) Rating
-                                        </Typography>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col gap-2 p-2 md:py-4 md:px-6'>
-                                    <div className='flex items-center gap-2'>
-                                        <Typography className="font-bold" >{review?.title} </Typography>
-                                        <Button className={`rounded-2xl text-xs py-1 w-fit px-1
+                                    <div className='flex flex-col gap-2 p-2 md:py-4 md:px-6'>
+                                        <div className='flex items-center gap-2'>
+                                            <Typography className="font-bold" >{review?.title} </Typography>
+                                            <Button className={`rounded-2xl text-xs py-1 w-fit px-1
                                     ${review?.isPositive ? "bg-green-300" : "bg-yellow-200"}`} >{review?.isPositive ? "Positive" : "Nagetive"}</Button>
+                                        </div>
+                                        <Typography className="text-gray-600 font-normal" >{review?.comment}</Typography>
                                     </div>
-                                    <Typography className="text-gray-600 font-normal" >{review?.comment}</Typography>
+
+
+                                    <div className='flex justify-end items-center gap-2 p-2 md:pb-2 md:px-6'>
+                                        <IconButton onClick={() => setReviewData(review)}
+                                            className='bg-blue-300' size='sm' >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                            </svg>
+
+                                        </IconButton>
+                                        <IconButton onClick={() => handleReviewdelete(review?._id)}
+                                            className='bg-red-300' size='sm' >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                        </IconButton>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
 
 
+                    </div>
+
+                    <SendReview productId={productId} refetch={refetch} />
                 </div>
-
-
             </div>
 
 
-            <SendReview productId={productId} refetch={refetch} />
 
+            <UpdateReviewModal open={reviewData} setOpen={setReviewData} refetch={refetch} />
+            <DeleteModal open={reviewDelete} close={setReviewDelete} endpoint={`review/delete/${reviewId}`} refetch={refetch} />
         </section>
     );
 };

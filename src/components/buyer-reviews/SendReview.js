@@ -29,7 +29,7 @@ const SendReview = ({ productId, refetch }) => {
             })
     }
     return (
-        <form onSubmit={handleSubmit(sendReview)} className='grid grid-cols-1 gap-4 max-w-[600px] h-fit bg-white rounded-md border p-4 mt-6'>
+        <form onSubmit={handleSubmit(sendReview)} className='grid grid-cols-1 gap-4 max-w-full h-fit bg-white rounded-md border p-4'>
             <div>
                 <Typography className="font-bold text-gray-900">Write a Review</Typography>
                 <Typography className="font-normal text-gray-500 text-sm">I recently purchased this product and I am extremely satisfied with its performance. It exceeded my expectations in terms of quality and functionality. Highly recommended!</Typography>
