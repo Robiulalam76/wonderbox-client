@@ -196,7 +196,7 @@ const ProductDetails = () => {
 
                 {selectedData === "Product Details" && <ProductData />}
                 {selectedData === "Company profile" && <CompanyProfile product={product} />}
-                {selectedData === "Buyer Reviews" && <BuyerReview />}
+                {selectedData === "Buyer Reviews" && <BuyerReview productId={product?._id} />}
             </div>
 
             <div className=' mt-16'>
