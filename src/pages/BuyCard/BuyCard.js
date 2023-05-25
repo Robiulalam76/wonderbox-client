@@ -1,13 +1,59 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
 import ShippingAddress from "../../components/BuyCardComponents/ShippingAddress";
 import Payment from "../../components/BuyCardComponents/Payment";
 import PaymentSuccess from "../../components/BuyCardComponents/PaymentSuccess";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../ContextAPI/AuthProvider";
 
 const BuyCard = () => {
+    const { user, userRefetch } = useContext(AuthContext)
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
+
+    const product = useLoaderData()
+    const navigate = useNavigate()
+
+    const handleBuy = () => {
+        const newCard = {
+            title: product?.title,
+            productId: product?._id,
+            userId: user?._id,
+            storeId: product?.storeId,
+            features: product?.features,
+            amount: product?.discount,
+            priveteKey: "sd45g65eg4f65e4g65ea4g6ae4wa54fwae9ge8tg4wae8r798wa7rw54f5wa",
+            type: product?.type
+        }
+        if (newCard) {
+            fetch(`http://localhost:5000/api/card/`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(newCard)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data) {
+                        navigate("/dashboard/orders")
+                    }
+                })
+        }
+
+    }
+
+    // console.log(activeStep);
+    const handleNext = () => {
+        if (activeStep === 1) {
+            handleBuy()
+        }
+        else {
+            setActiveStep(!isLastStep && activeStep + 1)
+        }
+    }
+
 
     return (
         <div className="max-w-primary mx-auto py-4 px-4">
@@ -59,19 +105,21 @@ const BuyCard = () => {
                 </Stepper>
 
 
-                {activeStep === 0 && <ShippingAddress />}
-                {activeStep === 1 && <Payment />}
-                {activeStep === 2 && <PaymentSuccess />}
+                <div className="overflow-auto w-full h-full pt-12">
+                    {activeStep === 0 && <ShippingAddress />}
+                    {activeStep === 1 && <Payment />}
+                    {activeStep === 2 && <PaymentSuccess />}
+                </div>
 
 
-                <div className="mt-32 flex justify-between">
+                <div className="flex justify-between mt-6">
                     <Button onClick={() => setActiveStep(!isFirstStep && activeStep - 1)}
                         disabled={isFirstStep}>
                         Prev
                     </Button>
-                    <Button onClick={() => setActiveStep(!isLastStep && activeStep + 1)}
+                    <Button onClick={() => handleNext()}
                         disabled={isLastStep}>
-                        Next
+                        {activeStep === 1 ? "Buy Now" : "Next"}
                     </Button>
                 </div>
             </div>

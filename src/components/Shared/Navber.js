@@ -74,7 +74,7 @@ const Navber = () => {
                     </div>
                 </div>
                 {
-                    user ? <div onClick={() => dispatch(setOpenProfileDrawer(true))} className='flex items-center gap-2'>
+                    user?._id ? <div onClick={() => dispatch(setOpenProfileDrawer(true))} className='flex items-center gap-2'>
                         <h1 className='font-bold text-blue-900 hidden sm:block'>{user?.name?.slice(0, 12)}</h1>
                         <div
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
