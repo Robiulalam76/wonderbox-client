@@ -26,6 +26,11 @@ const theme = {
           minWidth: "min-w-80",
           maxWidth: "max-w-[96%] md:max-w-[600px]",
         },
+        xl: {
+          width: "w-full",
+          minWidth: "min-w-fit",
+          maxWidth: "max-w-[96%] md:max-w-[600px]",
+        },
       },
     },
   },

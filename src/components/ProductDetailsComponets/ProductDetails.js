@@ -100,6 +100,8 @@ const ProductDetails = () => {
         }
 
     }
+
+    console.log(product);
     return (
         <div className='max-w-primary mx-auto px-4 min-h-screen'>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8 w-full'>
@@ -211,63 +213,64 @@ const ProductDetails = () => {
 
 
             {/* // ========================modal======================= */}
-            <Dialog open={open} handler={() => setOpen(false)} size='xxl' >
-                <DialogHeader>
-                    <Typography variant="h5" color="blue-gray">
-                        {product?.title}
-                    </Typography>
-                </DialogHeader>
-                <DialogBody divider className="grid place-items-center gap-4 overflow-hidden">
-                    <div class="overflow-x-auto flex flex-col md:flex-row md:justify-between">
-                        <img className='h-80 w-60 mx-auto' src={product.images[0]} alt="" />
-                        <div className='shadow-md rounded-lg h-fit'>
-                            <table class="mx-auto w-full bg-white h-32">
-                                <thead>
-                                    <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                                        <th class="py-3 px-6 text-left">QR Code</th>
-                                        <th class="py-3 px-6 text-left">Price</th>
-                                        <th class="py-3 px-6 text-left">Features</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 text-sm font-light h-fit">
-                                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                        <td class="py-3 px-6 text-left">
-                                            <QRCode className='w-10' value={JSON.stringify(productData)} />
-                                        </td>
-                                        <td class="py-3 px-6 text-left">${product?.price}</td>
-                                        <td class="py-3 px-6 text-left">
-                                            <ul className="text-sm">
-                                                {
-                                                    product?.features.map((feature, i) => (
-                                                        <li>{feature}</li>
-                                                    ))
-                                                }
-                                            </ul>
-                                        </td>
-                                    </tr>
+            <Dialog open={open} handler={() => setOpen(false)} size='xl' >
+                <div class="overflow-x-auto flex flex-col md:flex-row md:justify-between md:min-w-[1000px] p-4">
+                    {/* <img className='h-80 w-60 mx-auto' src={product.images[0]} alt="" /> */}
+                    <div className='w-96 relative'>
+                        <ProductImages images={product?.images} />
+                    </div>
+                    <div className='flex-grow grid grid-cols-1 gap-2 h-fit border'>
 
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >Title</Typography>
+                            <hr />
+                            <Typography className="mt-1 px-2" >{product?.title}</Typography>
+                        </div>
 
-                                </tbody>
-                            </table>
-                            <div className='flex items-center'>
-                                <th class="py-3 px-6 text-left">Unique ID: </th>
-                                <td class="py-3 px-6 text-left">
-                                    {unique.slice(0, 50)}
-                                </td>
-                            </div>
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >Features</Typography>
+                            <hr />
+                            <Typography className="mt-1 px-2" >
+                                {product?.features.map((feature, i) => <li>{feature}</li>)}
+                            </Typography>
+                        </div>
+
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >Store Name</Typography>
+                            <hr />
+                            <Typography className="mt-1 px-2" >{product?.storeName}</Typography>
+                        </div>
+
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >Product Type</Typography>
+                            <hr />
+                            <Typography className="mt-1 px-2" >{product?.type}</Typography>
+                        </div>
+
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >Product Key</Typography>
+                            <hr />
+                            <Typography className="mt-1 px-2" >{unique.slice(35, 80)}</Typography>
+                        </div>
+
+                        <div className=''>
+                            <Typography className="bg-blue-gray-50 px-2" >QR Code</Typography>
+                            <hr />
+                            <QRCode className='w-24 h-24 px-2' value={productData} ></QRCode>
                         </div>
 
                     </div>
 
-                </DialogBody>
-                <DialogFooter className="space-x-2">
-                    <Button variant="text" color="blue-gray" onClick={() => setOpen(!open)}>
+                </div>
+                <div className='flex justify-end items-center gap-4 p-4'>
+                    <Button variant="text" color="red" onClick={() => setOpen(!open)}>
                         close
                     </Button>
-                    <Button variant="gradient" onClick={() => handleBuy()}>
-                        Buy
-                    </Button>
-                </DialogFooter>
+                    <Link to={`/products/${product?._id}/buy`}>
+                        <Button variant="gradient" >
+                            Next
+                        </Button></Link>
+                </div>
             </Dialog>
 
         </div>
