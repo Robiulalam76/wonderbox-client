@@ -20,9 +20,9 @@ const ProductCard = ({ product }) => {
                     className="grid grid-cols-1 gap-2 p-3">
                     <h1 className="flex-grow font-bold text-gray-800 md:text-[18px]">{product?.title.slice(0, 50)}</h1>
                     <div className="flex items-center gap-1">
-                        <Rating value={5} readonly />
+                        <Rating value={product?.rating} readonly />
                         <Typography color="blue-gray" className="font-medium text-sm mt-1">
-                            {rated}.0
+                            {product?.rating}.0
                         </Typography>
                     </div>
                     <div className="flex flex-col gap-1 text-sm overflow-hidden">
