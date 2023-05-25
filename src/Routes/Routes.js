@@ -15,6 +15,7 @@ import RecipientRegister from '../pages/DashboardPages/RecipientRegister';
 import SellerOrders from '../pages/DashboardPages/SellerOrders';
 import MyShoppingAddress from '../pages/DashboardPages/MyShoppingAddress';
 import BuyCard from '../pages/BuyCard/BuyCard';
+import StoreProfile from '../pages/StoreProfile/StoreProfile';
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
                 path: '/products/:cardId/buy',
                 loader: ({ params }) => fetch(`http://localhost:5000/api/product/${params?.cardId}`),
                 element: <BuyCard></BuyCard>
+            },
+            {
+                path: '/stores/:username',
+                loader: ({ params }) => fetch(`http://localhost:5000/api/store/getInfo/${params?.username}`),
+                element: <StoreProfile></StoreProfile>
             },
 
             // store
