@@ -7,6 +7,7 @@ const TopRankingProducts = ({ storeId }) => {
         fetch(`http://localhost:5000/api/product/top-ranking-products/${storeId}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setProducts(data);
             })
     }, [])

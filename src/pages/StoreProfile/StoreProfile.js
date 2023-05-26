@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import StoreHome from '../../components/storeProfileComponents/StoreHome';
 import TopRankingProducts from '../../components/storeProfileComponents/TopRankingProducts';
+import StoreAbout from '../../components/storeProfileComponents/StoreAbout';
 const tabs = [
     { id: "1", title: "", name: "Home" },
     { id: "2", title: "Popular Products", name: "Popular" },
     { id: "3", title: "Top Ranking Products", name: "Top Ranking" },
-    { id: "4", title: "Latest Products", name: "Latest Products" },
-    { id: "5", title: "", name: "About" }
+    { id: "4", title: "", name: "About" }
 ]
 
 const StoreProfile = () => {
@@ -18,7 +18,7 @@ const StoreProfile = () => {
     return (
         <div className='max-w-primary px-4 mx-auto min-h-screen'>
             <div className='relative' >
-                <img className='w-full h-72 object-fill z-10' src="https://t3.ftcdn.net/jpg/02/62/18/46/360_F_262184611_bXhmboL9oE6k2ILu4qXxNWFhNJCEbTn2.jpg" alt="" />
+                <img className='w-full h-36 md:h-72 object-fill z-10' src="https://t3.ftcdn.net/jpg/02/62/18/46/360_F_262184611_bXhmboL9oE6k2ILu4qXxNWFhNJCEbTn2.jpg" alt="" />
 
                 <div className='flex items-end gap-6 absolute -bottom-20 left-12 z-50'>
                     <Avatar className='w-32 h-32 bg-white border border-black' src={data?.logo} />
@@ -50,6 +50,7 @@ const StoreProfile = () => {
                 <div className='mt-6'>
                     {selectedTab?.id === "1" && <StoreHome storeId={data?._id} />}
                     {selectedTab?.id === "3" && <TopRankingProducts storeId={data?._id} />}
+                    {selectedTab?.id === "4" && <StoreAbout store={data} />}
                 </div>
             </div>
 
