@@ -2,8 +2,8 @@ import React from 'react';
 // style="background: url('basko-assets/images/gradient.png'); background-repeat: no-repeat; background-size: 100% 100%;"
 const StoreAbout = ({ store }) => {
     return (
-        <section className="bg-gray-100 py-10">
-            <div className="container mx-auto px-4">
+        <section className="bg-gray-100 py-6">
+            <div className="mx-auto px-2 md:px-8">
                 <h2 className="text-3xl font-bold mb-4">About Our Store</h2>
                 <p className="text-lg mb-6">Welcome to MyStore, your one-stop destination for all your shopping needs.</p>
                 <p className="text-lg mb-6">At MyStore, we believe in providing top-quality products and exceptional customer service. With a wide range of products available, we aim to cater to the diverse needs and preferences of our customers.</p>

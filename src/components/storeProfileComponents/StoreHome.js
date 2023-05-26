@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../cards/ProductCard';
 
-const StoreHome = ({ storeId }) => {
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/product/store/show-products/${storeId}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setProducts(data);
-            })
-    }, [])
+const StoreHome = ({ products }) => {
+
     return (
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
             {
