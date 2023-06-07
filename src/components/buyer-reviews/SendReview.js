@@ -3,7 +3,7 @@ import { AuthContext } from '../../ContextAPI/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Rating, Textarea, Typography } from '@material-tailwind/react';
 
-const SendReview = ({ productId, refetch }) => {
+const SendReview = ({ product, refetch }) => {
     const { user, userRefetch, signupWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const [rating, setRating] = useState()
@@ -11,9 +11,10 @@ const SendReview = ({ productId, refetch }) => {
 
     const sendReview = (data) => {
         data["reviewerId"] = user?._id
-        data["productId"] = productId
+        data["productId"] = product?._id
         data["rating"] = rating
         data["isPositive"] = isPositive === "Positive" ? true : false
+        data["storeId"] = product?.storeId
         // console.log(data);
         fetch(`http://localhost:5000/api/review`, {
             method: "POST",

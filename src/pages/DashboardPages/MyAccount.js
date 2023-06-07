@@ -7,9 +7,6 @@ const MyAccount = () => {
     const { user, userRefetch } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
 
-    const { name, email, password, phone, country } = user;
-    // console.log(user);
-
     const [isEditable, setIsEditable] = useState(false);
 
     // handle update user data
@@ -64,7 +61,7 @@ const MyAccount = () => {
                                 ${errors.name && "border-red-500"}`}
                                 type="text"
                                 name="name"
-                                defaultValue={name}
+                                defaultValue={user?.name}
                                 disabled={!isEditable}
                                 readOnly={!isEditable} />
                         </div>
@@ -77,7 +74,7 @@ const MyAccount = () => {
                                 ${errors.phone && "border-red-500"}`}
                                 type="text"
                                 name="phone"
-                                defaultValue={phone}
+                                defaultValue={user?.phone}
                                 disabled={!isEditable}
                                 readOnly={!isEditable} />
                         </div>
@@ -87,7 +84,7 @@ const MyAccount = () => {
                             <input className={`w-full h-10 px-3 rounded focus:outline-none border focus:border-primary bg-slate-50`}
                                 type="email"
                                 name="email"
-                                value={email}
+                                value={user?.email}
                                 disabled />
                         </div>
 
@@ -108,7 +105,7 @@ const MyAccount = () => {
                                 ${errors.country && "border-red-500"}`}
                                 type="text"
                                 name="country"
-                                defaultValue={country}
+                                defaultValue={user?.country}
                                 disabled={!isEditable}
                                 readOnly={!isEditable} />
                         </div>

@@ -57,27 +57,29 @@ export default class ProductImageCorousel extends Component {
                 </Slider>
 
 
-                <div className="hidden group-hover:block">
-                    <div className="absolute top-[40%] w-full flex items-center justify-between px-3">
+                {
+                    this.props.images?.length > 1 && <div className="hidden group-hover:block">
+                        <div className="absolute top-[40%] w-full flex items-center justify-between px-3">
 
-                        <button
-                            className="bg-gray-100 hover:bg-primary hover:text-white text-gray-900 h-8 w-8 flex items-center justify-center rounded-full object-cover overflow-hidden"
-                            onClick={this.previous}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                            </svg>
-                        </button>
+                            <button
+                                className="bg-gray-100 hover:bg-primary hover:text-white text-gray-900 h-8 w-8 flex items-center justify-center rounded-full object-cover overflow-hidden"
+                                onClick={this.previous}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
 
-                        <button
-                            className="bg-gray-100 hover:bg-primary hover:text-white text-gray-900 h-8 w-8 flex items-center justify-center rounded-full object-cover overflow-hidden"
-                            onClick={this.next}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </button>
+                            <button
+                                className="bg-gray-100 hover:bg-primary hover:text-white text-gray-900 h-8 w-8 flex items-center justify-center rounded-full object-cover overflow-hidden"
+                                onClick={this.next}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
 
+                        </div>
                     </div>
-                </div>
+                }
             </>
         );
     }

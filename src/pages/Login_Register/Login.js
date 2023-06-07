@@ -34,6 +34,7 @@ export default function Login() {
         })
             .then(res => res.json())
             .then(data => {
+                // console.log(data);
                 if (data?.success === true) {
                     localStorage.setItem('wonderboxtoken', data.token)
                     setIsLoading(false)

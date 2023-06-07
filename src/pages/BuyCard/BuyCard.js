@@ -6,6 +6,10 @@ import PaymentSuccess from "../../components/BuyCardComponents/PaymentSuccess";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 
+import { v4 as uuidv4 } from 'uuid';
+
+
+
 const BuyCard = () => {
     const { user, userRefetch } = useContext(AuthContext)
     const [activeStep, setActiveStep] = useState(0);
@@ -15,6 +19,8 @@ const BuyCard = () => {
     const product = useLoaderData()
     const navigate = useNavigate()
 
+    const privateKey = uuidv4();
+
     const handleBuy = () => {
         const newCard = {
             title: product?.title,
@@ -23,7 +29,7 @@ const BuyCard = () => {
             storeId: product?.storeId,
             features: product?.features,
             amount: product?.discount,
-            priveteKey: "sd45g65eg4f65e4g65ea4g6ae4wa54fwae9ge8tg4wae8r798wa7rw54f5wa",
+            priveteKey: privateKey,
             type: product?.type
         }
         if (newCard) {
@@ -36,6 +42,7 @@ const BuyCard = () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data);
                     if (data) {
                         navigate("/dashboard/orders")
                     }

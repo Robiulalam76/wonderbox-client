@@ -31,7 +31,6 @@ const RecipientRegister = () => {
             .then(data => {
                 setIsLoading(false)
                 setResultModal(data)
-                console.log(data);
             })
     }
 
