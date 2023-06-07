@@ -28,7 +28,7 @@ const Notifications = () => {
 
     useEffect(() => {
         setIsloading(true)
-        fetch(`http://localhost:5000/api/history/user/${user?._id}`)
+        fetch(`http://localhost:5000/api/notification/user/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 setNotifications(data);
