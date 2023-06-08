@@ -16,6 +16,7 @@ import SellerOrders from '../pages/DashboardPages/SellerOrders';
 import MyShoppingAddress from '../pages/DashboardPages/MyShoppingAddress';
 import BuyCard from '../pages/BuyCard/BuyCard';
 import StoreProfile from '../pages/StoreProfile/StoreProfile';
+import HistoryPage from '../pages/DashboardPages/HistoryPage';
 
 const router = createBrowserRouter([
     {
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/recipient', element: <RecipientRegister /> },
             { path: '/dashboard/shopping-address', element: <MyShoppingAddress /> },
             { path: '/dashboard/seller-orders', element: <SellerOrders /> },
+            { path: '/dashboard/history', element: <HistoryPage /> },
         ]
     }
 ])

@@ -21,6 +21,7 @@ const MyAccount = () => {
 
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (data?.update) {
                     userRefetch()
                     setIsEditable(false)

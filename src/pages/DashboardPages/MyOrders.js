@@ -68,14 +68,6 @@ const MyOrders = () => {
         <Card className="h-full max-w-full">
 
             <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div>
-                    <Typography variant="h5" color="blue-gray">
-                        Order Card list
-                    </Typography>
-                    <Typography color="gray" className="mt-1 font-normal">
-                        See information about all Order Cards
-                    </Typography>
-                </div>
                 <div className="flex flex-col items-start md:items-center md:justify-between gap-4 md:flex-row mt-2">
                     <div className='grid grid-cols-2' >
                         {tabs.map((item, i) => (
