@@ -1,9 +1,10 @@
 import React from 'react';
 import { routes } from '../../utils/routesData';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button, Typography } from '@material-tailwind/react';
 
 const DashboardDrawerData = () => {
+    const { pathname } = useLocation()
     return (
         <div className='grid grid-cols-1 gap-4 w-full px-4 mt-6 mx-auto relative' >
             <Link to="/" className='flex items-center justify-start px-2' >
@@ -14,7 +15,8 @@ const DashboardDrawerData = () => {
                 {
                     routes?.map(route => (
                         <Link to={`/${route?.url}`} >
-                            <Button className='flex items-center justify-start px-2 gap-2 py-3 rounded-sm bg-white text-black shadow-none hover:shadow-none w-full hover:bg-primary hover:text-white' >
+                            <Button className={`flex items-center justify-start px-2 gap-2 py-3 rounded-sm shadow-none hover:shadow-none w-full hover:bg-secondary hover:text-gray-800
+                            ${pathname.includes(route?.url) ? "bg-primary text-white" : "bg-white text-gray-800"}`} >
                                 {route?.img}
                                 <Typography className="text-sm">{route.title}</Typography>
                             </Button>

@@ -20,7 +20,7 @@ import QRCode from "react-qr-code";
 export default function OrderTable({ data }) {
     const [open, setOpen] = useState(false);
     const [productData, setProductData] = useState(null);
-    console.log(data);
+    // console.log(data);
 
     const handleQrCode = (p) => {
         const productData = {

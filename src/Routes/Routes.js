@@ -17,6 +17,7 @@ import MyShoppingAddress from '../pages/DashboardPages/MyShoppingAddress';
 import BuyCard from '../pages/BuyCard/BuyCard';
 import StoreProfile from '../pages/StoreProfile/StoreProfile';
 import HistoryPage from '../pages/DashboardPages/HistoryPage';
+import PriveteRoute from './PriveteRoute';
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/products/:cardId/buy',
                 loader: ({ params }) => fetch(`http://localhost:5000/api/product/${params?.cardId}`),
-                element: <BuyCard></BuyCard>
+                element: <PriveteRoute><BuyCard></BuyCard></PriveteRoute>
             },
             {
                 path: '/stores/:username',
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/dashboard', element: <Dashboard />, children: [
+        path: '/dashboard', element: <PriveteRoute><Dashboard ></Dashboard></PriveteRoute>, children: [
             { path: '/dashboard', element: <MyAccount /> },
             { path: '/dashboard/my-account', element: <MyAccount /> },
             { path: '/dashboard/orders', element: <MyOrders /> },

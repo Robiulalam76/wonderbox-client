@@ -32,16 +32,12 @@ const Navber = () => {
                 <div className='hidden lg:block'>
                     <Link to='/home' className='text-black hover:text-primary duration-100 font-semibold'>Home</Link>
                 </div>
-                {/* <div className='hidden lg:block'>
-                    <Link to='/how-it-works' className='text-black hover:text-primary duration-100 font-semibold'>How it works</Link>
-                </div> */}
+                {
+                    user?._id && <div className='hidden lg:block'>
+                        <Link to='/dashboard' className='text-black hover:text-primary duration-100 font-semibold'>Dashboard</Link>
+                    </div>
+                }
                 <div className='hidden lg:block'>
-                    <Link to='/dashboard' className='text-black hover:text-primary duration-100 font-semibold'>Dashboard</Link>
-                </div>
-                <div className='hidden lg:block'>
-                    <Link to='/store/add-card' className='text-black hover:text-primary duration-100 font-semibold'>Add Product</Link>
-                </div>
-                {/* <div className='hidden lg:block'>
                     <Link to='/about-us' className='text-black hover:text-primary duration-100 font-semibold'>About Us</Link>
                 </div>
                 <div className='hidden lg:block'>
@@ -49,7 +45,7 @@ const Navber = () => {
                 </div>
                 <div className='hidden lg:block'>
                     <Link to='/faq' className='text-black hover:text-primary duration-100 font-semibold'>FAQ</Link>
-                </div> */}
+                </div>
                 <div className='flex justify-between items-center gap-6'>
                     <div  >
                         <div className='relative'>
@@ -115,9 +111,6 @@ const Navber = () => {
                 <div className='lg:hidden w-full flex items-center px-2 text-left hover:bg-[#0029FF]'>
                     <Link to='/home' className='text-black font-semibold hover:text-white w-full py-2'>Home</Link>
                 </div>
-                {/* <div className='lg:hidden w-full flex items-center px-2 text-left hover:bg-[#0029FF]'>
-                    <Link to='/how-it-works' className='text-black font-semibold hover:text-white w-full py-2'>How it works</Link>
-                </div> */}
                 <div className='lg:hidden w-full flex items-center px-2 text-left hover:bg-[#0029FF]'>
                     <Link to='/about-us' className='text-black font-semibold hover:text-white w-full py-2'>About Us</Link>
                 </div>
@@ -127,8 +120,8 @@ const Navber = () => {
                 <div className='lg:hidden w-full flex items-center px-2 text-left hover:bg-[#0029FF]'>
                     <Link to='/faq' className='text-black font-semibold hover:text-white w-full py-2'>FAQ</Link>
                 </div>
-                {/* {
-                    !userInfo && <div className='lg:hidden flex items-center gap-6 mt-4'>
+                {
+                    !user && <div className='lg:hidden flex items-center gap-6 mt-4'>
                         <Link to='/login' className='w-24 h-8 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                             <h1 className='text-white font-semibold'>LOG IN</h1>
                         </Link>
@@ -136,7 +129,7 @@ const Navber = () => {
                             <h1 className='text-primary font-semibold'>REGISTER</h1>
                         </Link>
                     </div>
-                } */}
+                }
                 <div className='lg:hidden flex items-center gap-6 mt-4'>
                     <Link to='/login' className='w-24 h-8 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                         <h1 className='text-white font-semibold'>LOG IN</h1>

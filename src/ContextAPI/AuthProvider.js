@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
 
     // console.log(user);
     const userRefetch = () => {
+        setLoading(true)
         fetch(`http://localhost:5000/api/user/me`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("wonderboxtoken")}`,
@@ -18,10 +19,14 @@ const AuthProvider = ({ children }) => {
             },
         })
             .then((res) => res.json())
-            .then((data) => setUser(data));
+            .then((data) => {
+                setUser(data)
+                setLoading(false)
+            });
     }
 
     useEffect(() => {
+        setLoading(true)
         userRefetch()
     }, [token]);
 
@@ -35,6 +40,7 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setLoading(true)
         localStorage.removeItem('wonderboxtoken')
+        setLoading(false)
         return signOut(auth)
     }
 
