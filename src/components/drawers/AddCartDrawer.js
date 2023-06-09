@@ -1,49 +1,49 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setOpenWishlistDrawer,
-  setWishlistProducts,
+  setAddCartProducts,
+  setOpenAddCartDrawer,
 } from "../../Slices/controllerSlice";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import { Link } from "react-router-dom";
 import { Drawer } from "@material-tailwind/react";
 
-const WishlistDrawer = () => {
+const AddCartDrawer = () => {
   const { user } = useContext(AuthContext);
-  const { openWishlistDrawer, wishlistProducts } = useSelector(
+  const { openAddCartDrawer, addCartProducts } = useSelector(
     (state) => state.controllerSlice
   );
   const dispatch = useDispatch();
 
-  const handleGetWishlist = () => {
-    fetch(`http://localhost:5000/api/wishlist/user/${user?._id}`)
+  const handleGetAddCart = () => {
+    fetch(`http://localhost:5000/api/addcart/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
-        dispatch(setWishlistProducts(data));
+        dispatch(setAddCartProducts(data));
       });
   };
 
   useEffect(() => {
-    handleGetWishlist();
+    handleGetAddCart();
   }, [user?._id]);
 
-  const handleWishlistRemove = (id) => {
-    fetch(`http://localhost:5000/api/wishlist/${user?._id}/${id}`, {
+  const handleCartRemove = (id) => {
+    fetch(`http://localhost:5000/api/addcart/${user?._id}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.status === "success") {
-          handleGetWishlist();
+          handleGetAddCart();
         }
       });
   };
 
   return (
     <Drawer
-      open={openWishlistDrawer}
-      onClose={() => dispatch(setOpenWishlistDrawer(false))}
+      open={openAddCartDrawer}
+      onClose={() => dispatch(setOpenAddCartDrawer(false))}
       placement="right"
       className="p-4"
     >
@@ -51,8 +51,8 @@ const WishlistDrawer = () => {
         <div className="flex h-full flex-col overflow-y-auto">
           <div className="flex-1 overflow-y-auto py-6">
             <ul className="-my-6 divide-y divide-gray-200">
-              {wishlistProducts &&
-                wishlistProducts.map((product) => (
+              {addCartProducts &&
+                addCartProducts.map((product) => (
                   <li key={product?.id} className="flex py-6">
                     <Link
                       to={`/products/${product?.product?._id}`}
@@ -79,7 +79,7 @@ const WishlistDrawer = () => {
                         <p className="text-gray-500">Qty 1</p>
 
                         <button
-                          onClick={() => handleWishlistRemove(product?._id)}
+                          onClick={() => handleCartRemove(product?._id)}
                           className="flex"
                           type="button"
                         >
@@ -94,7 +94,7 @@ const WishlistDrawer = () => {
             </ul>
           </div>
 
-          {wishlistProducts.length === 0 && (
+          {addCartProducts.length === 0 && (
             <div className="flex justify-center items-center w-full h-full">
               <h1 className="text-center font-bold text-2xl text-primary">
                 No Wishlist Products
@@ -102,7 +102,7 @@ const WishlistDrawer = () => {
             </div>
           )}
 
-          {wishlistProducts.length > 0 && (
+          {addCartProducts.length > 0 && (
             <div className="border-t border-gray-200 py-6">
               <div className="flex justify-between text-base font-medium text-gray-900">
                 <p>Subtotal</p>
@@ -127,4 +127,4 @@ const WishlistDrawer = () => {
   );
 };
 
-export default WishlistDrawer;
+export default AddCartDrawer;

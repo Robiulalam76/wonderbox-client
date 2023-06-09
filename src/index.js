@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from '@material-tailwind/react';
-import AuthProvider from './ContextAPI/AuthProvider';
-import { Provider } from 'react-redux';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider } from "@material-tailwind/react";
+import AuthProvider from "./ContextAPI/AuthProvider";
+import { Provider } from "react-redux";
+import store from "./store";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Toaster } from "react-hot-toast";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = {
   dialog: {
     styles: {
@@ -38,9 +39,10 @@ const theme = {
 root.render(
   <React.StrictMode>
     <ThemeProvider value={theme}>
-      <Provider store={store} >
+      <Provider store={store}>
         <AuthProvider>
           <App />
+          <Toaster />
         </AuthProvider>
       </Provider>
     </ThemeProvider>
