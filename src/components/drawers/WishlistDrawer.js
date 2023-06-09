@@ -33,12 +33,15 @@ const WishlistDrawer = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.status === "success") {
           handleGetWishlist();
         }
       });
   };
+
+  const totalPrice = wishlistProducts.reduce((accumulator, product) => {
+    return accumulator + parseInt(product.product.price);
+  }, 0);
 
   return (
     <Drawer
@@ -73,7 +76,9 @@ const WishlistDrawer = () => {
                           </Link>
                           <p className="ml-4">{product?.product?.price}</p>
                         </div>
-                        <p className="mt-1 text-sm text-gray-500">blue</p>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {product?.product?.type}
+                        </p>
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
                         <p className="text-gray-500">Qty 1</p>
@@ -106,7 +111,7 @@ const WishlistDrawer = () => {
             <div className="border-t border-gray-200 py-6">
               <div className="flex justify-between text-base font-medium text-gray-900">
                 <p>Subtotal</p>
-                <p>$262.00</p>
+                <p>${totalPrice}.00</p>
               </div>
               <p className="mt-0.5 text-sm text-gray-500">
                 Shipping and taxes calculated at checkout.
