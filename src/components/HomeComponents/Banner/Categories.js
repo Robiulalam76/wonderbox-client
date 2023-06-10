@@ -13,7 +13,6 @@ const Categories = () => {
     fetch(`http://localhost:5000/api/category/show`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setCategories(data);
       });
   }, []);

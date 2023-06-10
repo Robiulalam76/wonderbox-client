@@ -16,7 +16,7 @@ const Product = () => {
       <Typography className="text-xl font-bold mb-2">
         Latest Products
       </Typography>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((product, i) => (
           <ProductCard key={i} product={product} />
         ))}

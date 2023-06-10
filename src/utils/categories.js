@@ -2,7 +2,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f501",
     children: ["Organic Food"],
-    children_slug: ["organic-food"],
     approved: "true",
     slug: "organic-food",
     status: "Show",
@@ -13,7 +12,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f503",
     children: ["Sauces", "Pickles & Condiments"],
-    children_slug: ["sauces", "pickles-&-condiments"],
     approved: "true",
     slug: "sauces-&-pickles",
     status: "Show",
@@ -31,14 +29,6 @@ export const categories = [
       "Pest Control",
       "Cleaning Tools",
     ],
-    children_slug: [
-      "cleaner",
-      "laundry",
-      "air-freshener",
-      "water-filter",
-      "pest-control",
-      "cleaning-tools",
-    ],
     approved: "true",
     slug: "household-tools",
     status: "Hide",
@@ -49,7 +39,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f509",
     children: ["Cat Care", "Dog Care", "Bird Care"],
-    children_slug: ["cat-care", "dog-care", "bird-care"],
     approved: "true",
     slug: "pet-care",
     status: "Hide",
@@ -67,14 +56,6 @@ export const categories = [
       "Body Care",
       "Shaving Needs",
     ],
-    children_slug: [
-      "bath",
-      "cosmetics",
-      "oral-care",
-      "skin-care",
-      "body-care",
-      "shaving-needs",
-    ],
     approved: "true",
     slug: "new-arrival",
     status: "Show",
@@ -85,7 +66,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4ff",
     children: ["Tea", "Water", "Juice", "Coffee", "Energy Drinks"],
-    children_slug: ["tea", "water", "juice", "coffee", "energy-drinks"],
     approved: "true",
     slug: "drinks",
     status: "Show",
@@ -96,7 +76,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f502",
     children: ["Honey"],
-    children_slug: ["honey"],
     approved: "true",
     slug: "honey",
     status: "Show",
@@ -107,7 +86,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f505",
     children: ["Chocolate", "Chips & Nuts", "Canned Food"],
-    children_slug: ["chocolate", "chips-&-nuts", "canned-food"],
     approved: "true",
     slug: "snacks-&-instant",
     status: "Show",
@@ -118,7 +96,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f508",
     children: ["Baby Food", "Baby Accessories"],
-    children_slug: ["baby-food", "baby-accessories"],
     approved: "true",
     slug: "baby-care",
     status: "Show",
@@ -136,14 +113,6 @@ export const categories = [
       "Body Care",
       "Shaving Needs",
     ],
-    children_slug: [
-      "bath",
-      "cosmetics",
-      "oral-care",
-      "skin-care",
-      "body-care",
-      "shaving-needs",
-    ],
     approved: "true",
     slug: "beauty-&-health",
     status: "Hide",
@@ -154,7 +123,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f50b",
     children: ["Sports", "Fitness"],
-    children_slug: ["sports", "fitness"],
     approved: "true",
     slug: "sports-&-fitness",
     status: "Show",
@@ -165,7 +133,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4fa",
     children: ["Fish", "Meat"],
-    children_slug: ["fish", "meat"],
     approved: "true",
     slug: "fish-&-meat",
     status: "Show",
@@ -176,7 +143,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4fb",
     children: ["Dry Fruits", "Fresh Fruits", "Fresh Vegetable"],
-    children_slug: ["dry-fruits", "fresh-fruits", "fresh-vegetable"],
     approved: "true",
     slug: "fruits-&-vegetable",
     status: "Show",
@@ -187,7 +153,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4fe",
     children: ["Bread", "Cereal"],
-    children_slug: ["bread", "cereal"],
     approved: "true",
     slug: "breakfast",
     status: "Show",
@@ -198,7 +163,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f500",
     children: ["Dairy", "Ice Cream", "Butter & Ghee"],
-    children_slug: ["dairy", "ice-cream", "butter-&-ghee"],
     approved: "true",
     slug: "milk-&-dairy",
     status: "Show",
@@ -209,7 +173,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f504",
     children: ["Jam & Jelly"],
-    children_slug: ["jam-&-jelly"],
     approved: "true",
     slug: "jam-&-jelly",
     status: "Show",
@@ -220,7 +183,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4fc",
     children: ["Fresh Seafood"],
-    children_slug: ["fresh-seafood"],
     approved: "true",
     slug: "fresh-seafood",
     status: "Show",
@@ -231,7 +193,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f4fd",
     children: ["Oil", "Rice", "Flour", "Dry Vegetable", "Spices & Mixes"],
-    children_slug: ["oil", "rice", "flour", "dry-vegetable", "spices-&-mixes"],
     approved: "true",
     slug: "cooking-essentials",
     status: "Show",
@@ -242,7 +203,6 @@ export const categories = [
   {
     _id: "644a6a1d1d99756b22f3f506",
     children: ["Cakes", "Biscuits"],
-    children_slug: ["cakes", "biscuits"],
     approved: "true",
     slug: "biscuits-&-cakes",
     status: "Hide",
