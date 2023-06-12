@@ -1,4 +1,4 @@
-import { Button, IconButton, Typography } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 import React, { useContext } from "react";
 import {
   setAddCartProducts,
@@ -6,7 +6,8 @@ import {
 } from "../../Slices/controllerSlice";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const wishlist = (
   <svg
@@ -105,7 +106,16 @@ const AddCartAndWishlist = ({ product }) => {
 
   const handleAddCart = (id) => {
     if (addCartedProduct) {
-      toast.error("Alreday Add Cart This Product.");
+      toast.error("Alreday Add Cart This Product.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     } else {
       const newAddcart = {

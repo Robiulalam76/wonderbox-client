@@ -6,13 +6,16 @@ import { AuthContext } from "../../ContextAPI/AuthProvider";
 import ProfileDrawer from "../drawers/ProfileDrawer";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setAddCartProducts,
   setOpenAddCartDrawer,
   setOpenProfileDrawer,
   setOpenWishlistDrawer,
+  setWishlistProducts,
 } from "../../Slices/controllerSlice";
 import WishlistDrawer from "../drawers/WishlistDrawer";
 import { Badge, IconButton } from "@material-tailwind/react";
 import AddCartDrawer from "../drawers/AddCartDrawer";
+
 const Navber = () => {
   const { user } = useContext(AuthContext);
   const {
@@ -23,6 +26,27 @@ const Navber = () => {
   } = useSelector((state) => state.controllerSlice);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const handleGetWishlist = () => {
+    fetch(`http://localhost:5000/api/wishlist/user/${user?._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(setWishlistProducts(data));
+      });
+  };
+
+  const handleGetAddCart = () => {
+    fetch(`http://localhost:5000/api/addcart/user/${user?._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(setAddCartProducts(data));
+      });
+  };
+
+  useEffect(() => {
+    handleGetAddCart();
+    handleGetWishlist();
+  }, [user?._id]);
 
   let navberRef = useRef();
   useEffect(() => {
@@ -84,57 +108,64 @@ const Navber = () => {
             FAQ
           </Link>
         </div>
-        <div className="flex justify-between items-center gap-6">
-          <div
-            onClick={() => dispatch(setOpenWishlistDrawer(!openWishlistDrawer))}
-          >
-            <Badge
-              className=""
-              content={
-                wishlistProducts?.length > 0 ? wishlistProducts?.length : 0
-              }
-            >
-              <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
-                <img className="w-5" src={love} alt="navberImage" />
-              </IconButton>
-            </Badge>
-          </div>
 
-          <div
-            onClick={() => dispatch(setOpenAddCartDrawer(!openAddCartDrawer))}
-          >
-            <Badge
-              className=""
-              content={
-                addCartProducts?.length > 0 ? addCartProducts?.length : 0
-              }
-            >
-              <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
-                <img className="w-5" src={cart} alt="navberImage" />
-              </IconButton>
-            </Badge>
-          </div>
-        </div>
         {user?._id ? (
-          <div
-            onClick={() => dispatch(setOpenProfileDrawer(true))}
-            className="flex items-center gap-2"
-          >
-            <h1 className="font-bold text-blue-900 hidden sm:block">
-              {user?.name?.slice(0, 12)}
-            </h1>
-            <div className="relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold">
-              {user?.image ? (
-                <img
-                  className="w-10 h-10 object-cover rounded-full"
-                  src={user?.image}
-                  alt=""
-                />
-              ) : (
-                <span>{user?.name?.slice(0, 1)} </span>
-              )}
+          <>
+            <div className="flex justify-between items-center gap-6">
+              <div
+                onClick={() =>
+                  dispatch(setOpenWishlistDrawer(!openWishlistDrawer))
+                }
+              >
+                <Badge
+                  className=""
+                  content={
+                    wishlistProducts?.length > 0 ? wishlistProducts?.length : 0
+                  }
+                >
+                  <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
+                    <img className="w-5" src={love} alt="navberImage" />
+                  </IconButton>
+                </Badge>
+              </div>
+
+              <div
+                onClick={() =>
+                  dispatch(setOpenAddCartDrawer(!openAddCartDrawer))
+                }
+              >
+                <Badge
+                  className=""
+                  content={
+                    addCartProducts?.length > 0 ? addCartProducts?.length : 0
+                  }
+                >
+                  <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
+                    <img className="w-5" src={cart} alt="navberImage" />
+                  </IconButton>
+                </Badge>
+              </div>
             </div>
-          </div>
+            <div
+              onClick={() => dispatch(setOpenProfileDrawer(true))}
+              className="flex items-center gap-2"
+            >
+              <h1 className="font-bold text-blue-900 hidden sm:block">
+                {user?.name?.slice(0, 12)}
+              </h1>
+              <div className="relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold">
+                {user?.image ? (
+                  <img
+                    className="w-10 h-10 object-cover rounded-full"
+                    src={user?.image}
+                    alt=""
+                  />
+                ) : (
+                  <span>{user?.name?.slice(0, 1)} </span>
+                )}
+              </div>
+            </div>
+          </>
         ) : (
           <div className="hidden lg:block lg:flex justify-between items-center gap-6">
             <Link
@@ -229,7 +260,7 @@ const Navber = () => {
             FAQ
           </Link>
         </div>
-        {!user && (
+        {!user?._id && (
           <div className="lg:hidden flex items-center gap-6 mt-4">
             <Link
               to="/login"
@@ -245,20 +276,6 @@ const Navber = () => {
             </Link>
           </div>
         )}
-        <div className="lg:hidden flex items-center gap-6 mt-4">
-          <Link
-            to="/login"
-            className="w-24 h-8 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded"
-          >
-            <h1 className="text-white font-semibold">LOG IN</h1>
-          </Link>
-          <Link
-            to="/register"
-            className="w-24 h-8 border border-[#0029FF] hover:bg-gray-300 duration-300 flex justify-center items-center rounded"
-          >
-            <h1 className="text-primary font-semibold">REGISTER</h1>
-          </Link>
-        </div>
       </div>
 
       <ProfileDrawer />

@@ -8,9 +8,11 @@ import AuthProvider from "./ContextAPI/AuthProvider";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = {
@@ -42,14 +44,11 @@ root.render(
       <Provider store={store}>
         <AuthProvider>
           <App />
-          <Toaster />
+          <ToastContainer />
         </AuthProvider>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
