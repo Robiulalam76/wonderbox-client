@@ -18,14 +18,6 @@ const TopRankingProducts = () => {
       });
   }, []);
 
-  //   const next = () => {
-  //     sliderRef.current.slickNext();
-  //   };
-
-  //   const previous = () => {
-  //     sliderRef.current.slickPrev();
-  //   };
-
   const settings = {
     dots: true,
     infinite: true,
@@ -56,9 +48,9 @@ const TopRankingProducts = () => {
 
   return (
     <div className="mt-8 relative group">
-      <div className="grid grid-cols-2 mb-8 h-[250px]">
+      <div className="md:grid grid-cols-2 mb-8 h-[250px] hidden md:block">
         <img className="w-full h-[250px]" src={banner1} alt="" />
-        <div className="bg-blue-gray-200 p-4">
+        <div className="bg-blue-gray-50 p-4">
           <h1 className="font-bold text-2xl text-gray-800">
             Top Ranking Products
           </h1>

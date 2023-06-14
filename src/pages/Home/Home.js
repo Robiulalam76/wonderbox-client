@@ -7,6 +7,8 @@ import VerifiedStores from "../../components/HomeComponents/VerifiedStores/Verif
 import Banner from "../../components/HomeComponents/Banner/Banner";
 import LatestProducts from "../../components/HomeComponents/LatestProducts/LatestProducts";
 import TopRankingProducts from "../../components/HomeComponents/TopRankingProducts/TopRankingProducts";
+import PopularProducts from "../../components/HomeComponents/PopularProducts/PopularProducts";
+import About from "../About/About";
 
 const Home = () => {
   return (
@@ -17,6 +19,8 @@ const Home = () => {
         {/* <Product /> */}
         <VerifiedStores />
         <TopRankingProducts />
+        <About />
+        <PopularProducts />
         <ProductRequirements />
       </div>
 
