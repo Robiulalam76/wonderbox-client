@@ -39,8 +39,6 @@ const ProductDetails = () => {
   const [selectedData, setSelectedData] = useState("Product Details");
   const [products, setProducts] = useState([]);
 
-  console.log(product);
-
   useEffect(() => {
     fetch(`http://localhost:5000/api/product/show/all`)
       .then((res) => res.json())
@@ -68,38 +66,6 @@ const ProductDetails = () => {
     setUnique(encoded);
   }
 
-  const handleBuy = () => {
-    const newCard = {
-      title: product?.title,
-      productId: product?._id,
-      userId: "6461e98f001ed5154abd5210",
-      storeId: product?.storeId,
-      features: [
-        "For 2 people",
-        "1 gourmet meal",
-        "1,400 renowned restaurants and our selection of tables recommended by gastronomic guides",
-      ],
-      amount: product?.discount,
-    };
-    if (newCard) {
-      fetch(`http://localhost:5000/api/card/`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newCard),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data) {
-            navigate("/dashboard/orders");
-          }
-          setOpen(false);
-        });
-    }
-  };
-
-  console.log(product);
   return (
     <div className="max-w-primary mx-auto px-4 min-h-screen">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8 w-full">

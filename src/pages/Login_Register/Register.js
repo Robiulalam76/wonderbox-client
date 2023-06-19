@@ -15,13 +15,16 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/icons/google.png";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
+import Login from "./Login";
+
+const items = ["Register", "Login"];
 
 const Register = () => {
   const { userRefetch, signupWithGoogle } = useContext(AuthContext);
+  const [selectedData, setSelectedData] = useState("Register");
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const [agree, setAgree] = useState(false);
@@ -131,145 +134,163 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-light-blue-100">
-      <div className="max-w-[1440px] mx-auto px-4 p-6">
-        <div className="w-full h-full p-16 bg-blue-gray-50">
-          <h1 className="font-bold text-left text-3xl text-gray-900 mt-4">
-            Register
-          </h1>
-          <h1 className="text-left text-gray-600">
-            Manage All Lotterly Efficiently
-          </h1>
-
-          <p className="text-gray-500 text-sm mt-4">
-            Let's you get up all setup so you can verify you personal account
-            and begin setting up your profile
-          </p>
-
-          <form onSubmit={handleSubmit(handleRegister)} className="mt-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <Input
-                {...register("firstname", { required: true })}
-                className="rounded-none"
-                size="md"
-                name="firstname"
-                label="First Name"
-              />
-
-              <Input
-                {...register("lastname", { required: false })}
-                className="rounded-none"
-                size="md"
-                name="lastname"
-                label="Last Name"
-              />
-
-              <Input
-                {...register("phone", { required: false })}
-                className="rounded-none"
-                size="md"
-                name="phone"
-                label="Phone Number"
-              />
-
-              <Input
-                {...register("country", { required: true })}
-                className="rounded-none"
-                size="md"
-                name="country"
-                label="Country*"
-              />
-
-              <Input
-                {...register("email", { required: true })}
-                className="rounded-none"
-                size="md"
-                name="email"
-                label="Email*"
-              />
-
-              <Input
-                {...register("password", { required: true })}
-                className="rounded-none"
-                size="md"
-                name="password"
-                label="Password*"
-              />
-
-              <Input
-                {...register("confirmpassword", { required: true })}
-                className="rounded-none"
-                size="md"
-                name="confirmpassword"
-                label="Confirm Password*"
-              />
-
-              <div className="flex gap-10">
-                <Radio
-                  onClick={() => setRole("seller")}
-                  id="seller"
-                  name="type"
-                  label="Seller"
-                  defaultChecked
-                />
-                <Radio
-                  onClick={() => setRole("buyer")}
-                  id="buyer"
-                  name="type"
-                  label="Buyer"
-                />
-              </div>
-            </div>
-
-            <Checkbox
-              onClick={() => setAgree(!agree)}
-              label={
-                <Typography color="blue-gray" className="font-medium flex p-0">
-                  I agree with the
-                  <Typography
-                    as="a"
-                    href="#"
-                    color="blue"
-                    className="font-medium hover:text-blue-700 transition-colors"
-                  >
-                    &nbsp;terms and conditions
-                  </Typography>
-                  .
-                </Typography>
-              }
-            />
-
-            {agree ? (
+    <div className="bg-blue-50">
+      <div className="max-w-[800px] mx-auto px-4 p-6">
+        <div>
+          <div className="grid grid-cols-2">
+            {items.map((item, i) => (
               <Button
-                type="submit"
-                className="w-36 h-10 my-4 flex justify-center items-center rounded-sm bg-primary hover:bg-darkPrimary duration-200 text-white font-bold"
+                key={i}
+                onClick={() => setSelectedData(item)}
+                className={`w-full rounded-none shadow-none hover:shadow-none h-12
+                                ${
+                                  selectedData === item
+                                    ? "bg-primary"
+                                    : "bg-gray-50 text-black"
+                                }`}
               >
-                {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <h1>Register</h1>
-                    <Spinner />
-                  </div>
-                ) : (
-                  <h1>Register</h1>
-                )}
+                {item}
               </Button>
-            ) : (
-              <button
-                disabled
-                className="w-36 h-10 my-4 flex justify-center items-center rounded-sm bg-gray-500 cursor-not-allowed text-white font-bold"
+            ))}
+          </div>
+
+          {selectedData === "Register" && (
+            <div className="w-full h-full md:px-16 p-6 bg-white">
+              <form onSubmit={handleSubmit(handleRegister)} className="mt-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Input
+                    {...register("firstname", { required: true })}
+                    className="rounded-none"
+                    size="md"
+                    name="firstname"
+                    label="First Name"
+                  />
+
+                  <Input
+                    {...register("lastname", { required: false })}
+                    className="rounded-none"
+                    size="md"
+                    name="lastname"
+                    label="Last Name"
+                  />
+
+                  <Input
+                    {...register("phone", { required: false })}
+                    className="rounded-none"
+                    size="md"
+                    name="phone"
+                    label="Phone Number"
+                  />
+
+                  <Input
+                    {...register("country", { required: true })}
+                    className="rounded-none"
+                    size="md"
+                    name="country"
+                    label="Country*"
+                  />
+
+                  <Input
+                    {...register("email", { required: true })}
+                    className="rounded-none"
+                    size="md"
+                    name="email"
+                    label="Email*"
+                  />
+
+                  <Input
+                    {...register("password", { required: true })}
+                    className="rounded-none"
+                    size="md"
+                    name="password"
+                    label="Password*"
+                  />
+
+                  <Input
+                    {...register("confirmpassword", { required: true })}
+                    className="rounded-none"
+                    size="md"
+                    name="confirmpassword"
+                    label="Confirm Password*"
+                  />
+
+                  <div className="flex gap-10">
+                    <Radio
+                      onClick={() => setRole("seller")}
+                      id="seller"
+                      name="type"
+                      label="Seller"
+                      defaultChecked
+                    />
+                    <Radio
+                      onClick={() => setRole("buyer")}
+                      id="buyer"
+                      name="type"
+                      label="Buyer"
+                    />
+                  </div>
+                </div>
+
+                <Checkbox
+                  onClick={() => setAgree(!agree)}
+                  label={
+                    <Typography
+                      color="blue-gray"
+                      className="font-medium flex p-0"
+                    >
+                      I agree with the
+                      <Typography
+                        as="a"
+                        href="#"
+                        color="blue"
+                        className="font-medium hover:text-blue-700 transition-colors"
+                      >
+                        &nbsp;terms and conditions
+                      </Typography>
+                      .
+                    </Typography>
+                  }
+                />
+
+                {agree ? (
+                  <Button
+                    type="submit"
+                    className="w-36 h-10 my-4 flex justify-center items-center rounded-sm bg-primary hover:bg-darkPrimary duration-200 text-white font-bold"
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <h1>Register</h1>
+                        <Spinner />
+                      </div>
+                    ) : (
+                      <h1>Register</h1>
+                    )}
+                  </Button>
+                ) : (
+                  <button
+                    disabled
+                    className="w-36 h-10 my-4 flex justify-center items-center rounded-sm bg-gray-500 cursor-not-allowed text-white font-bold"
+                  >
+                    <h1>Register</h1>
+                  </button>
+                )}
+              </form>
+              <Button
+                color="green"
+                onClick={() => handleLoginWithGoogle()}
+                className="w-full h-12 border rounded-sm bg-white hover:bg-gray-50 flex justify-center items-center gap-2 shadow-none hover:shadow-none"
               >
-                <h1>Register</h1>
-              </button>
-            )}
-          </form>
-          <Button
-            color="green"
-            onClick={() => handleLoginWithGoogle()}
-            className="w-full h-12 border rounded-sm bg-white hover:bg-gray-50 flex justify-center items-center gap-2 shadow-none hover:shadow-none"
-          >
-            <img className="w-8" src={google} alt="" />
-            <h1 className="text-gray-800 font-bold">Google</h1>
-          </Button>
+                <img className="w-8" src={google} alt="" />
+                <h1 className="text-gray-800 font-bold">Google</h1>
+              </Button>
+            </div>
+          )}
+
+          {selectedData === "Login" && (
+            <div className="w-full h-full p-6 bg-white">
+              <Login />
+            </div>
+          )}
         </div>
       </div>
     </div>
