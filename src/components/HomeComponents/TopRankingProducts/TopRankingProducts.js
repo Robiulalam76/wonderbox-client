@@ -52,7 +52,7 @@ const TopRankingProducts = () => {
         <img className="w-full h-[250px]" src={banner1} alt="" />
         <div className="bg-blue-gray-50 p-4">
           <h1 className="font-bold text-2xl text-gray-800">
-            Top Ranking Products
+            Top Ranking Productsdf
           </h1>
           <p className="mt-6">
             Discover the latest and greatest products that have received top

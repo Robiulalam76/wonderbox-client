@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../../cards/ProductCard";
 import Slider from "react-slick";
+import { useRef } from "react";
 
 const PopularProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +20,7 @@ const PopularProducts = () => {
     dots: true,
     infinite: true,
     slidesToShow: slidesToShow,
+    // slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
     autoplaySpeed: 2000,
@@ -28,7 +30,7 @@ const PopularProducts = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setSlidesToShow(1);
+        setSlidesToShow(4);
       } else {
         setSlidesToShow(4);
       }
@@ -42,15 +44,15 @@ const PopularProducts = () => {
     };
   }, []);
   return (
-    <div className="mt-16 relative group">
+    <div className="mt-8 relative group">
       <h1 className="font-bold text-2xl text-gray-800 mb-2">
         Popular Products
       </h1>
-      <Slider ref={sliderRef} {...settings}>
+      <div className="grid md:grid-cols-2 lg:grid-cols-4">
         {products.map((product, i) => (
           <ProductCard key={i} product={product} status="" />
         ))}
-      </Slider>
+      </div>
     </div>
   );
 };
