@@ -106,6 +106,35 @@ export default function ProfileDrawer() {
             </span>
           </Link>
         </li>
+
+        <li>
+          <Link
+            to="/dashboard/deposit"
+            onClick={() => dispatch(setOpenProfileDrawer(false))}
+            className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
+          >
+            <span className="inline-flex justify-center items-center ml-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+                className="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
+                />
+              </svg>
+            </span>
+            <span className="ml-2 text-sm tracking-wide truncate">
+              Deposit Wallet
+            </span>
+          </Link>
+        </li>
         <li>
           <Link
             to="/dashboard/notification"
