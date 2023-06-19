@@ -3,15 +3,15 @@ import logo from "../../assets/logo/logo.png";
 import moment from "moment";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { Button, Input, Spinner, Textarea } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 
-const Deposit = () => {
+const DepositForm = () => {
   const { user, imageUpload } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const date = moment("2023-01-10").format("DD/MMM/YYYY");
@@ -51,14 +51,44 @@ const Deposit = () => {
       setIsLoading(false);
       return;
     }
+    data["type"] = "Deposit";
+    data["user"] = user?._id;
     const imagesFiles = await imageUpload(images);
     if (imagesFiles) {
       data["images"] = imagesFiles;
-      setIsLoading(false);
     }
-    setIsLoading(false);
 
-    console.log(data);
+    if (data) {
+      fetch(`http://localhost:5000/api/transaction`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            const message = data.success ? toast.success : toast.error;
+            message(
+              `${data?.success ? data?.message : "Deposit Request Failed"}`,
+              {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              }
+            );
+          }
+          reset();
+          setImages([]);
+          setIsLoading(false);
+        });
+    }
   };
   return (
     <section className="max-w-primary mx-auto px-4">
@@ -68,10 +98,10 @@ const Deposit = () => {
           <h1 className="text-gray-800 font-bold">Wonderbox</h1>
         </div>
         <h1 className="text-sm text-gray-800">Date: {date}</h1>
-        <hr className="my-2 border-8 border-primary" />
+        <hr className="my-3 border-8 border-primary" />
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4 grid grid-cols-2 gap-4">
+          <div className="mb-4 md:grid grid-cols-2 gap-4">
             <Input
               {...register("bank", { required: true })}
               size="lg"
@@ -91,7 +121,7 @@ const Deposit = () => {
               label="Branch Name"
             />
           </div>
-          <div className="mb-4 grid grid-cols-1 gap-4">
+          <div className="mb-4 md:grid grid-cols-2 gap-4">
             <Input
               {...register("accountNo", { required: true })}
               size="lg"
@@ -100,6 +130,26 @@ const Deposit = () => {
               name="accountNo"
               error={errors.accountNo}
               label="Account Number"
+            />
+            <Input
+              {...register("amount", { required: true })}
+              size="lg"
+              className="rounded"
+              type="number"
+              name="amount"
+              error={errors.amount}
+              label="Amount"
+            />
+          </div>
+          <div className="mb-4 grid grid-cols-1 gap-4">
+            <Input
+              {...register("txnId", { required: true })}
+              size="lg"
+              className="rounded"
+              type="text"
+              name="txnId"
+              error={errors.txnId}
+              label="Transaction ID"
             />
           </div>
           <div className="mb-4 grid grid-cols-1 gap-4">
@@ -182,4 +232,4 @@ const Deposit = () => {
   );
 };
 
-export default Deposit;
+export default DepositForm;

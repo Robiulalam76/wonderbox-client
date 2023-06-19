@@ -74,9 +74,9 @@ export const routes = [
     ),
   },
   {
-    _id: "2",
-    title: "Deposit",
-    url: "dashboard/deposit",
+    _id: "3",
+    title: "Deposit Wallet",
+    url: "dashboard/deposit-wallet",
     img: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,28 @@ export const routes = [
     ),
   },
   {
-    _id: "3",
+    _id: "4",
+    title: "Deposits",
+    url: "dashboard/deposits",
+    img: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
+        />
+      </svg>
+    ),
+  },
+  {
+    _id: "5",
     title: "Recipient",
     url: "dashboard/recipient",
     img: (
@@ -116,7 +137,7 @@ export const routes = [
     ),
   },
   {
-    _id: "4",
+    _id: "6",
     title: "History",
     url: "dashboard/history",
     img: (
