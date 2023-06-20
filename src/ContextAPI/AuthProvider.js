@@ -1,6 +1,8 @@
 import { getAuth, signInWithPopup, signOut } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.config";
+import { toast } from "react-toastify";
+import errSound from "../assets/audios/error.mp3";
 
 export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
@@ -61,6 +63,27 @@ const AuthProvider = ({ children }) => {
     return images;
   };
 
+  const openToast = (status, message) => {
+    var audio = new Audio(
+      (status === "warning" && errSound) || (status === "error" && errSound)
+    );
+    audio.play();
+    const notify =
+      (status === "success" && toast.success) ||
+      (status === "error" && toast.error) ||
+      (status === "warning" && toast.warning);
+    notify(message, {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   const authInfo = {
     user,
     userRefetch,
@@ -69,6 +92,7 @@ const AuthProvider = ({ children }) => {
     logout,
     loading,
     imageUpload,
+    openToast,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

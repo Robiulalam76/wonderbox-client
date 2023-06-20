@@ -14,12 +14,14 @@ const DashboardDrawer = () => {
         open={openDashboardDrawer}
         onClose={() => dispatch(setOpenDashboardDrawer(false))}
         placement="left"
-        className="lg:hidden w-60 bg-white min-h-screen h-full"
+        className="lg:hidden w-60 bg-[#1E2F32] h-screen"
       >
         <DashboardDrawerData />
       </Drawer>
-      <div className="hidden lg:block w-60 bg-[#1E2F32] min-h-screen h-full">
-        <DashboardDrawerData />
+      <div className="hidden lg:block w-60 bg-[#1E2F32] h-screen">
+        <div className="w-60 bg-[#1E2F32] h-screen fixed">
+          <DashboardDrawerData />
+        </div>
       </div>
     </>
   );

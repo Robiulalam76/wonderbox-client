@@ -15,7 +15,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { toast } from "react-toastify";
 
 export default function Login() {
-  const { userRefetch, signupWithGoogle } = useContext(AuthContext);
+  const { openToast, userRefetch, signupWithGoogle } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -42,6 +42,7 @@ export default function Login() {
       .then((data) => {
         if (data?.success === true) {
           localStorage.setItem("wonderboxtoken", data.token);
+          openToast("success", "User Create Successful");
           setIsLoading(false);
         }
         if (data?.token) {
@@ -75,6 +76,7 @@ export default function Login() {
         }
       })
       .catch((err) => {
+        openToast("error", "Something Went Wrong !");
         console.log(err);
       });
   };
@@ -91,18 +93,9 @@ export default function Login() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.message?.emailMessage || data?.message?.passwordMessage) {
-          toast.error(
-            data?.message?.emailMessage || data?.message?.passwordMessage,
-            {
-              position: "bottom-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
+          openToast(
+            "error",
+            data?.message?.emailMessage || data?.message?.passwordMessage
           );
         }
         if (data.token) {

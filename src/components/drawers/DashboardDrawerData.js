@@ -6,24 +6,24 @@ import { Button, Typography } from "@material-tailwind/react";
 const DashboardDrawerData = () => {
   const { pathname } = useLocation();
   return (
-    <div className="grid grid-cols-1 gap-4 w-full px-4 mt-6 mx-auto relative">
-      <Link to="/" className="flex items-center justify-start px-2">
+    <div className="grid grid-cols-1 gap-4 w-full mt-6 mx-auto relative">
+      <Link to="/" className="flex items-center justify-start px-4">
         <Typography className="font-bold text-xl text-gray-100">
           WONDERBOX
         </Typography>
       </Link>
-      <div className="mt-12">
+      <div className="mt-8">
         {routes?.map((route) => (
           <Link to={`/${route?.url}`}>
             <Button
-              className={`flex items-center justify-start px-2 gap-2 py-3 rounded-sm shadow-none hover:shadow-none w-full hover:bg-gray-100 hover:text-gray-800
+              className={`flex items-center justify-start px-2 gap-2 py-2 rounded-none shadow-none hover:shadow-none w-full hover:bg-gray-100 hover:text-gray-800
                             ${
                               pathname.includes(route?.url)
-                                ? "bg-secondary text-gray-900"
+                                ? "bg-[#F5F5F5] text-gray-900"
                                 : "bg-transparent text-gray-50"
                             }`}
             >
-              <div className="w-6">{route?.img}</div>
+              <div className="w-5">{route?.img}</div>
               <h1 className="text-xs">{route.title}</h1>
             </Button>
           </Link>

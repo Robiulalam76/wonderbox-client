@@ -61,7 +61,7 @@ const Navber = () => {
     };
   });
   return (
-    <nav ref={navberRef} className="bg-white py-4 uppercase border-b">
+    <nav ref={navberRef} className="bg-white py-2 uppercase border-b">
       <div className="relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 max-w-primary mx-auto">
         <div className="flex-grow uppercase font-bold">
           <Link to="/">Wonderbox</Link>
@@ -69,25 +69,24 @@ const Navber = () => {
         <div className="hidden lg:block">
           <Link
             to="/home"
-            className="text-black hover:text-primary duration-100 font-semibold"
+            className="text-gray-900 hover:text-primary duration-100 font-semibold text-sm"
           >
             Home
           </Link>
         </div>
-        {/* {user?._id && (
-          <div className="hidden lg:block">
-            <Link
-              to="/dashboard"
-              className="text-black hover:text-primary duration-100 font-semibold"
-            >
-              Dashboard
-            </Link>
-          </div>
-        )} */}
+        <div className="hidden lg:block">
+          <Link
+            to="/products"
+            className="text-gray-900 hover:text-primary duration-100 font-semibold text-sm"
+          >
+            Products
+          </Link>
+        </div>
+
         <div className="hidden lg:block">
           <Link
             to="/about-us"
-            className="text-black hover:text-primary duration-100 font-semibold"
+            className="text-gray-900 hover:text-primary duration-100 font-semibold text-sm"
           >
             About Us
           </Link>
@@ -95,7 +94,7 @@ const Navber = () => {
         <div className="hidden lg:block">
           <Link
             to="/contact"
-            className="text-black hover:text-primary duration-100 font-semibold"
+            className="text-gray-900 hover:text-primary duration-100 font-semibold text-sm"
           >
             Contact
           </Link>
@@ -103,7 +102,7 @@ const Navber = () => {
         <div className="hidden lg:block">
           <Link
             to="/faq"
-            className="text-black hover:text-primary duration-100 font-semibold"
+            className="text-gray-900 hover:text-primary duration-100 font-semibold text-sm"
           >
             FAQ
           </Link>
@@ -136,7 +135,10 @@ const Navber = () => {
                     wishlistProducts?.length > 0 ? wishlistProducts?.length : 0
                   }
                 >
-                  <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
+                  <IconButton
+                    size="sm"
+                    className="bg-blue-gray-50 shadow-none hover:shadow-none"
+                  >
                     <img className="w-5" src={love} alt="navberImage" />
                   </IconButton>
                 </Badge>
@@ -153,7 +155,10 @@ const Navber = () => {
                     addCartProducts?.length > 0 ? addCartProducts?.length : 0
                   }
                 >
-                  <IconButton className="bg-blue-gray-50 shadow-none hover:shadow-none">
+                  <IconButton
+                    size="sm"
+                    className="bg-blue-gray-50 shadow-none hover:shadow-none"
+                  >
                     <img className="w-5" src={cart} alt="navberImage" />
                   </IconButton>
                 </Badge>
@@ -163,9 +168,6 @@ const Navber = () => {
               onClick={() => dispatch(setOpenProfileDrawer(true))}
               className="flex items-center gap-2"
             >
-              {/* <h1 className="font-bold text-blue-900 hidden sm:block">
-                {user?.name?.slice(0, 12)}
-              </h1> */}
               <div className="relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold">
                 {user?.image ? (
                   <img

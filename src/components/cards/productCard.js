@@ -7,7 +7,7 @@ import ranking from "../../assets/icons/ranking.png";
 const ProductCard = ({ product, status }) => {
   return (
     <div
-      className="flex flex-col justify-between border border-gray-600/20 bg-white h-[506px] mx-2 hover:shadow-2xl"
+      className="flex flex-col justify-between border border-gray-600/20 bg-white h-[506px] mx-2 hover:shadow-2xl rounded-2xl"
       id="box-shadow"
     >
       <div>

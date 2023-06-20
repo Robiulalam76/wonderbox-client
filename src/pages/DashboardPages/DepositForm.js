@@ -7,7 +7,7 @@ import { Button, Input, Spinner, Textarea } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 
 const DepositForm = () => {
-  const { user, imageUpload } = useContext(AuthContext);
+  const { openToast, user, imageUpload } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -20,16 +20,7 @@ const DepositForm = () => {
   const [images, setImages] = useState([]);
   const handleImageSet = (input) => {
     if (images?.length > 2) {
-      toast.error("Max 3 Images Can Added", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      openToast("error", "Max 3 Images Can Added");
     } else {
       setImages([...images, input]);
     }
@@ -38,16 +29,7 @@ const DepositForm = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     if (images.length === 0) {
-      toast.warning("Image is Required for Payment Proof", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      openToast("warning", "Image is Required for Payment Proof");
       setIsLoading(false);
       return;
     }
@@ -69,19 +51,10 @@ const DepositForm = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data) {
-            const message = data.success ? toast.success : toast.error;
-            message(
-              `${data?.success ? data?.message : "Deposit Request Failed"}`,
-              {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              }
+            const message = data.success ? "success" : "error";
+            openToast(
+              message,
+              data?.success ? data?.message : "Deposit Request Failed"
             );
           }
           reset();

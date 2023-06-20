@@ -2,25 +2,23 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { GoogleAuthProvider } from "firebase/auth";
 import {
-  Card,
   Input,
   Checkbox,
   Button,
   Typography,
-  Select,
-  Option,
   Spinner,
   Radio,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import google from "../../assets/icons/google.png";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import Login from "./Login";
+import { toast } from "react-toastify";
 
 const items = ["Register", "Login"];
 
 const Register = () => {
-  const { userRefetch, signupWithGoogle } = useContext(AuthContext);
+  const { openToast, userRefetch, signupWithGoogle } = useContext(AuthContext);
   const [selectedData, setSelectedData] = useState("Register");
   const {
     register,
@@ -31,9 +29,6 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [emailResult, setEmailResult] = useState("");
-  const [passwordResult, setPasswordResult] = useState("");
-  const [show, setShow] = useState(false);
   const [role, setRole] = useState("seller");
 
   const googleProvider = new GoogleAuthProvider();
@@ -57,10 +52,10 @@ const Register = () => {
         if (data?.token) {
           const token = localStorage.getItem("wonderboxtoken");
           if (token) {
+            openToast("success", "User Create Successful");
             userRefetch();
             setIsLoading(false);
             navigate("/home");
-            setShow(true);
           }
         }
       });
@@ -85,17 +80,16 @@ const Register = () => {
         }
       })
       .catch((err) => {
-        // console.log(err)
+        openToast("error", "Something Went Wrong !");
       });
   };
 
   const handleRegister = (data) => {
-    console.log(data);
     setIsLoading(true);
 
     if (data?.password !== data?.confirmpassword) {
       setIsLoading(false);
-      setPasswordResult("Password Not Matched");
+      openToast("error", "Password Not Matched");
       return;
     }
 
@@ -107,7 +101,6 @@ const Register = () => {
       password: data?.password,
       role: role,
     };
-    // console.log(newUser);
     fetch(`http://localhost:5000/api/user/register`, {
       method: "POST",
       headers: {
@@ -118,25 +111,24 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.message?.emailMessage) {
-          setEmailResult(data?.message?.emailMessage);
+          openToast("error", data?.message?.emailMessage);
           setIsLoading(false);
         }
         if (data?.token) {
           localStorage.setItem("wonderboxtoken", data?.token);
+          openToast("success", "User Create Successful");
           setIsLoading(false);
           userRefetch();
           navigate("/home");
-          setShow(true);
-        } else {
-          setIsLoading(false);
         }
+        setIsLoading(false);
       });
   };
 
   return (
-    <div className="bg-blue-50">
-      <div className="max-w-[800px] mx-auto px-4 p-6">
-        <div>
+    <div className="bg-[#eaf6fc] min-h-screen">
+      <div className="max-w-[800px] mx-auto px-4 p-6 flex justify-center items-center">
+        <div className="w-full mt-8">
           <div className="grid grid-cols-2">
             {items.map((item, i) => (
               <Button
@@ -155,21 +147,24 @@ const Register = () => {
           </div>
 
           {selectedData === "Register" && (
-            <div className="w-full h-full md:px-16 p-6 bg-white">
+            <div className="w-full h-full md:px-16 p-6 bg-white shadow-sm">
               <form onSubmit={handleSubmit(handleRegister)} className="mt-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <Input
                     {...register("firstname", { required: true })}
                     className="rounded-none"
                     size="md"
+                    type="text"
                     name="firstname"
                     label="First Name"
+                    error={errors.firstname}
                   />
 
                   <Input
                     {...register("lastname", { required: false })}
                     className="rounded-none"
                     size="md"
+                    type="text"
                     name="lastname"
                     label="Last Name"
                   />
@@ -178,40 +173,50 @@ const Register = () => {
                     {...register("phone", { required: false })}
                     className="rounded-none"
                     size="md"
+                    type="number"
                     name="phone"
                     label="Phone Number"
+                    error={errors.phone}
                   />
 
                   <Input
                     {...register("country", { required: true })}
                     className="rounded-none"
                     size="md"
+                    type="text"
                     name="country"
                     label="Country*"
+                    error={errors.country}
                   />
 
                   <Input
                     {...register("email", { required: true })}
                     className="rounded-none"
                     size="md"
+                    type="email"
                     name="email"
                     label="Email*"
+                    error={errors.email}
                   />
 
                   <Input
                     {...register("password", { required: true })}
                     className="rounded-none"
                     size="md"
+                    type="password"
                     name="password"
                     label="Password*"
+                    error={errors.password}
                   />
 
                   <Input
                     {...register("confirmpassword", { required: true })}
                     className="rounded-none"
                     size="md"
+                    type="password"
                     name="confirmpassword"
                     label="Confirm Password*"
+                    error={errors.confirmpassword}
                   />
 
                   <div className="flex gap-10">
@@ -232,6 +237,7 @@ const Register = () => {
                 </div>
 
                 <Checkbox
+                  checked={agree}
                   onClick={() => setAgree(!agree)}
                   label={
                     <Typography
