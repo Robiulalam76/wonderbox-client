@@ -35,7 +35,7 @@ const ProductCard = ({ product, status }) => {
 
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center gap-2">
-          <h1 className="text-gray-800 md:text-2xl font-bold text-left">
+          <h1 className="text-gray-800 md:text-xl font-bold text-left">
             ₹ {product?.price}
           </h1>
           {product?.discount > 0 && (
@@ -44,9 +44,10 @@ const ProductCard = ({ product, status }) => {
                 variant="ghost"
                 color="red"
                 size="sm"
+                className="text-xs"
                 value={`SAVE ${product?.discount}%`}
               />
-              <span className="text-sm line-through text-gray-500">
+              <span className="text-xs line-through text-gray-600">
                 ₹{product?.originalPrice}
               </span>
             </>
