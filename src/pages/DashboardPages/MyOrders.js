@@ -28,19 +28,27 @@ const MyOrders = () => {
   const [selectType, setSelectType] = useState("Wallet");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10); // Assuming there are 10 pages in total
-  const [products, setProducts] = useState([]); // Your array of products goes here
-  const itemsPerPage = 10; // Number of products to display per page
+  const [totalPages, setTotalPages] = useState(0);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/card/getcards/${user?._id}/${selectType}`)
+  const [products, setProducts] = useState([]);
+
+  const fetchOrders = (page) => {
+    fetch(
+      `http://localhost:5000/api/card/getcards/${user?._id}/${selectType}?page=${page}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data);
+        setCurrentPage(data.page);
+        setTotalPages(data.totalPages);
       });
-  }, [selectType, setSelectType]);
+  };
 
-  const handlePreviousPage = () => {
+  useEffect(() => {
+    fetchOrders(currentPage);
+  }, [currentPage, selectType, setSelectType]);
+
+  const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
@@ -51,12 +59,6 @@ const MyOrders = () => {
       setCurrentPage(currentPage + 1);
     }
   };
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  const productsToShow = products?.slice(startIndex, endIndex);
-  const hasMoreProducts = endIndex < products?.length;
 
   return (
     <Card className="h-full max-w-full">
@@ -138,7 +140,7 @@ const MyOrders = () => {
           </tr>
         </thead>
         <tbody className="overflow-scroll px-0">
-          {productsToShow?.map((product, i) => (
+          {products?.map((product, i) => (
             <OrderTable key={i} data={product} />
           ))}
         </tbody>
@@ -153,8 +155,8 @@ const MyOrders = () => {
             variant="outlined"
             color="blue-gray"
             size="sm"
+            onClick={handlePrevPage}
             disabled={currentPage === 1}
-            onClick={handlePreviousPage}
           >
             Previous
           </Button>
@@ -162,8 +164,8 @@ const MyOrders = () => {
             variant="outlined"
             color="blue-gray"
             size="sm"
-            disabled={!hasMoreProducts}
             onClick={handleNextPage}
+            disabled={currentPage === totalPages}
           >
             Next
           </Button>

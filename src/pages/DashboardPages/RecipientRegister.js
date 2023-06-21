@@ -55,6 +55,7 @@ const RecipientRegister = () => {
       productId: data.productId,
       userId: user?._id,
       storeId: data?.storeId,
+      payType: "Offline",
       type: data.type,
       price: data.price,
       privateKey: data?.privateKey,

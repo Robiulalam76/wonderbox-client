@@ -12,7 +12,6 @@ import ProductDetails from "../components/ProductDetailsComponets/ProductDetails
 import MyAccount from "../pages/DashboardPages/MyAccount";
 import MyOrders from "../pages/DashboardPages/MyOrders";
 import RecipientRegister from "../pages/DashboardPages/RecipientRegister";
-import SellerOrders from "../pages/DashboardPages/SellerOrders";
 import MyShoppingAddress from "../pages/DashboardPages/MyShoppingAddress";
 import BuyCard from "../pages/BuyCard/BuyCard";
 import StoreProfile from "../pages/StoreProfile/StoreProfile";
@@ -103,7 +102,6 @@ const router = createBrowserRouter([
       { path: "/dashboard/deposits", element: <Deposits /> },
       { path: "/dashboard/recipient", element: <RecipientRegister /> },
       { path: "/dashboard/shopping-address", element: <MyShoppingAddress /> },
-      { path: "/dashboard/seller-orders", element: <SellerOrders /> },
       { path: "/dashboard/history", element: <HistoryPage /> },
     ],
   },

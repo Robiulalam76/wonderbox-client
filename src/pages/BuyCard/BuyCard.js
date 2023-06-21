@@ -6,13 +6,15 @@ import PaymentSuccess from "../../components/BuyCardComponents/PaymentSuccess";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 
-import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
 
 const BuyCard = () => {
   const { user, userRefetch } = useContext(AuthContext);
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
   const [isFirstStep, setIsFirstStep] = useState(false);
+
+  const { selectedAddress } = useSelector((state) => state.controllerSlice);
 
   const product = useLoaderData();
   const navigate = useNavigate();
@@ -24,7 +26,12 @@ const BuyCard = () => {
       storeId: product?.storeId,
       amount: product?.discount,
       type: product?.type,
+      payType: "Online",
       price: product?.price,
+      address: selectedAddress._id,
+
+      txnId: "5DF5454DF5",
+      method: "Paypal",
     };
 
     if (product?.type === "Wallet") {
@@ -43,6 +50,7 @@ const BuyCard = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data) {
             navigate("/dashboard/orders");
           }
@@ -50,7 +58,6 @@ const BuyCard = () => {
     }
   };
 
-  // console.log(activeStep);
   const handleNext = () => {
     if (activeStep === 1) {
       handleBuy();
@@ -67,7 +74,7 @@ const BuyCard = () => {
           isLastStep={(value) => setIsLastStep(value)}
           isFirstStep={(value) => setIsFirstStep(value)}
         >
-          <Step onClick={() => setActiveStep(0)}>
+          <Step>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -97,7 +104,7 @@ const BuyCard = () => {
             </div>
           </Step>
 
-          <Step onClick={() => setActiveStep(1)}>
+          <Step>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -118,11 +125,11 @@ const BuyCard = () => {
                 variant="small"
                 color={activeStep === 1 ? "blue" : "blue-gray"}
               >
-                Pyament
+                Payment
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => setActiveStep(2)}>
+          <Step>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -161,7 +168,10 @@ const BuyCard = () => {
           >
             Prev
           </Button>
-          <Button onClick={() => handleNext()} disabled={isLastStep}>
+          <Button
+            onClick={() => handleNext()}
+            disabled={selectedAddress?._id ? false : true}
+          >
             {activeStep === 1 ? "Buy Now" : "Next"}
           </Button>
         </div>
