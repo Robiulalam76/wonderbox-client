@@ -32,9 +32,11 @@ const MyOrders = () => {
 
   const [products, setProducts] = useState([]);
 
-  const fetchOrders = (page) => {
+  const fetchOrders = () => {
     fetch(
-      `http://localhost:5000/api/card/getcards/${user?._id}/${selectType}?page=${page}`
+      `http://localhost:5000/api/card/getcards/${
+        user?._id
+      }/${selectType}?page=${currentPage ? currentPage : 1}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -44,8 +46,10 @@ const MyOrders = () => {
       });
   };
 
+  console.log(products, currentPage);
+
   useEffect(() => {
-    fetchOrders(currentPage);
+    fetchOrders();
   }, [currentPage, selectType, setSelectType]);
 
   const handlePrevPage = () => {
@@ -117,6 +121,24 @@ const MyOrders = () => {
                 className="font-normal leading-none"
               >
                 Amount
+              </Typography>
+            </th>
+            <th className="bg-blue-500 p-4 text-left text-white">
+              <Typography
+                variant="small"
+                color="white"
+                className="font-normal leading-none"
+              >
+                Method
+              </Typography>
+            </th>
+            <th className="bg-blue-500 p-4 text-left text-white">
+              <Typography
+                variant="small"
+                color="white"
+                className="font-normal leading-none"
+              >
+                State
               </Typography>
             </th>
             <th className="bg-blue-500 p-4 text-left text-white">

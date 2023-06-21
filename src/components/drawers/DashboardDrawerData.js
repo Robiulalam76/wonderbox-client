@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { routes } from "../../utils/routesData";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Typography } from "@material-tailwind/react";
+import { AuthContext } from "../../ContextAPI/AuthProvider";
 
 const DashboardDrawerData = () => {
+  const { user } = useContext(AuthContext);
   const { pathname } = useLocation();
+  console.log(user);
   return (
     <div className="grid grid-cols-1 gap-4 w-full mt-6 mx-auto relative">
       <Link to="/" className="flex items-center justify-start px-4">

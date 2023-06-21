@@ -3,48 +3,21 @@ import {
   Avatar,
   IconButton,
   Tooltip,
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Switch,
+  Chip,
 } from "@material-tailwind/react";
 
-import { useState } from "react";
-import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 
+import paypal from "../../assets/icons/paypal.png";
+import moment from "moment";
+
 export default function OrderTable({ data }) {
-  const [open, setOpen] = useState(false);
-  const [productData, setProductData] = useState(null);
-  //   console.log(data);
-
-  const handleQrCode = (p) => {
-    const productData = {
-      name: p?.title,
-      price: p.amout,
-      id: p?._id,
-    };
-    setProductData(productData);
-    setOpen(true);
-  };
-
-  const handleDownload = () => {
-    const canvas = document.querySelector("canvas");
-    const link = document.createElement("a");
-    link.download = "my-product-qr.png";
-    link.href = canvas
-      .toDataURL("image/png")
-      .replace(/^data:image\/[^;]/, "data:application/octet-stream");
-    link.click();
-  };
   return (
     <tr className="w-full py-4 bg-blue-gray-50 border-b border-white">
       <td className="text-white px-4 py-2">
         <div className="flex items-center gap-3">
           <Avatar
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+            src={data?.productId?.images[0]}
             alt=""
             size="md"
             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
@@ -58,14 +31,39 @@ export default function OrderTable({ data }) {
       </td>
       <td className="text-white px-4 py-2">
         <Typography variant="small" color="blue-gray" className="font-normal">
-          {data?.amount}
+          ₹ {data?.price}
         </Typography>
       </td>
       <td className="text-white px-4 py-2">
+        {data?.payment ? (
+          <Avatar
+            src={data?.payment?.method === "Paypal" && paypal}
+            alt=""
+            size="md"
+            className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+          />
+        ) : (
+          <Chip
+            size="sm"
+            className="w-fit"
+            color="red"
+            variant="ghost"
+            value="Offline"
+          />
+        )}
+      </td>
+      <td className="text-white px-4 py-2">
+        <Chip
+          size="sm"
+          className="w-fit"
+          color={data?.state === "Enable" ? "green" : "red"}
+          variant="ghost"
+          value={data?.state === "Enable" ? "Active" : "Used"}
+        />
+      </td>
+      <td className="text-white px-4 py-2">
         <Typography variant="small" color="blue-gray" className="font-normal">
-          {new Date(data.createdAt && data.createdAt).toLocaleDateString(
-            "en-GB"
-          )}
+          {moment(data.createdAt).format("DD/MMM/YYYY")}
         </Typography>
       </td>
 
@@ -95,41 +93,6 @@ export default function OrderTable({ data }) {
           </Link>
         </Tooltip>
       </td>
-
-      <Dialog open={open} handler={() => setOpen(false)}>
-        <DialogHeader>
-          <Typography variant="h5" color="blue-gray">
-            Your Attention is Required!
-          </Typography>
-        </DialogHeader>
-        <DialogBody divider className="grid place-items-center gap-4">
-          {productData && (
-            <div className="mx-auto w-80">
-              <QRCode value={JSON.stringify(productData)} />
-
-              <button
-                className="w-fit px-6 h-12 hover:bg-darkPrimary bg-primary text-white mt-6 mx-auto"
-                onClick={handleDownload}
-              >
-                Download QR Code
-              </button>
-            </div>
-          )}
-          <Typography className="text-center font-normal">
-            A small river named Duden flows by their place and supplies it with
-            the necessary regelialia.
-          </Typography>
-        </DialogBody>
-        <DialogFooter className="space-x-2">
-          <Button
-            variant="text"
-            color="blue-gray"
-            onClick={() => setOpen(!open)}
-          >
-            close
-          </Button>
-        </DialogFooter>
-      </Dialog>
     </tr>
   );
 }
