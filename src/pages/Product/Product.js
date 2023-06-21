@@ -48,7 +48,6 @@ const Product = () => {
 
   const handleSetSearch = (data) => {
     setSearch(data);
-    getProducts();
     setOpenTitle(false);
   };
 
