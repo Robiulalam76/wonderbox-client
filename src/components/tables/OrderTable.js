@@ -8,51 +8,41 @@ import {
 
 import { Link } from "react-router-dom";
 
-import paypal from "../../assets/icons/paypal.png";
 import moment from "moment";
 
 export default function OrderTable({ data }) {
   return (
-    <tr className="w-full py-4 bg-blue-gray-50 border-b border-white">
-      <td className="text-white px-4 py-2">
+    <tr className="w-full py-2 bg-blue-gray-50 border-b border-white">
+      <td className="text-white px-4">
         <div className="flex items-center gap-3">
           <Avatar
-            src={data?.productId?.images[0]}
+            src={data?.product?.images[0]}
             alt=""
             size="md"
             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
           />
         </div>
       </td>
-      <td className="text-white px-4 py-2">
+      <td className="text-white px-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
           {data?.title}
         </Typography>
       </td>
-      <td className="text-white px-4 py-2">
+      <td className="text-white px-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
           ₹ {data?.price}
         </Typography>
       </td>
-      <td className="text-white px-4 py-2">
-        {data?.payment ? (
-          <Avatar
-            src={data?.payment?.method === "Paypal" && paypal}
-            alt=""
-            size="md"
-            className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-          />
-        ) : (
-          <Chip
-            size="sm"
-            className="w-fit"
-            color="red"
-            variant="ghost"
-            value="Offline"
-          />
-        )}
+      <td className="text-white px-4">
+        <Chip
+          size="sm"
+          className="w-fit"
+          color={data?.payType === "Offline" ? "pink" : "blue"}
+          variant="ghost"
+          value={data?.payType}
+        />
       </td>
-      <td className="text-white px-4 py-2">
+      <td className="text-white px-4">
         <Chip
           size="sm"
           className="w-fit"
@@ -61,13 +51,13 @@ export default function OrderTable({ data }) {
           value={data?.state === "Enable" ? "Active" : "Used"}
         />
       </td>
-      <td className="text-white px-4 py-2">
+      <td className="text-white px-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
           {moment(data.createdAt).format("DD/MMM/YYYY")}
         </Typography>
       </td>
 
-      <td className="text-white px-4 py-2 flex items-center gap-2">
+      <td className="text-white px-4 flex items-center gap-2">
         <Tooltip content="Edit User">
           <Link to={`/dashboard/orders/${data?._id}`}>
             <IconButton

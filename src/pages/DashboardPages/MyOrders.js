@@ -7,15 +7,7 @@ import {
   CardHeader,
   Typography,
   Button,
-  CardBody,
-  Chip,
   CardFooter,
-  Avatar,
-  IconButton,
-  Tooltip,
-  Tabs,
-  TabsHeader,
-  Tab,
   Input,
 } from "@material-tailwind/react";
 import OrderTable from "../../components/tables/OrderTable";
@@ -129,7 +121,7 @@ const MyOrders = () => {
                 color="white"
                 className="font-normal leading-none"
               >
-                Method
+                Pay
               </Typography>
             </th>
             <th className="bg-blue-500 p-4 text-left text-white">

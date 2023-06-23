@@ -4,7 +4,6 @@ import moment from "moment";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Button, Input, Spinner, Textarea } from "@material-tailwind/react";
-import { toast } from "react-toastify";
 
 const DepositForm = () => {
   const { openToast, user, imageUpload } = useContext(AuthContext);
@@ -14,7 +13,7 @@ const DepositForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const date = moment("2023-01-10").format("DD/MMM/YYYY");
+  const date = moment(Date.now()).format("DD/MMM/YYYY");
   const [isLoading, setIsLoading] = useState(false);
 
   const [images, setImages] = useState([]);
@@ -41,7 +40,7 @@ const DepositForm = () => {
     }
 
     if (data) {
-      fetch(`http://localhost:5000/api/transaction`, {
+      fetch(`http://localhost:5000/api/transaction/deposit`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

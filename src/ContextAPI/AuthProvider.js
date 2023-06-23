@@ -64,10 +64,10 @@ const AuthProvider = ({ children }) => {
   };
 
   const openToast = (status, message) => {
-    var audio = new Audio(
-      (status === "warning" && errSound) || (status === "error" && errSound)
-    );
-    audio.play();
+    var audio = new Audio(errSound);
+    if (status === "warning" || status === "error") {
+      audio.play();
+    }
     const notify =
       (status === "success" && toast.success) ||
       (status === "error" && toast.error) ||

@@ -8,6 +8,7 @@ const initialState = {
   addCartProducts: [],
   wishlistProducts: [],
   selectedAddress: null,
+  payableAmount: 0,
 };
 
 export const controllerSlice = createSlice({
@@ -35,6 +36,9 @@ export const controllerSlice = createSlice({
     setSelectedAddress: (state, action) => {
       state.selectedAddress = action.payload;
     },
+    setPayableAmount: (state, action) => {
+      state.payableAmount = action.payload;
+    },
   },
 });
 
@@ -46,5 +50,6 @@ export const {
   setAddCartProducts,
   setWishlistProducts,
   setSelectedAddress,
+  setPayableAmount,
 } = controllerSlice.actions;
 export default controllerSlice.reducer;

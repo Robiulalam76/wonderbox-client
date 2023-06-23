@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 
 const ProductSummary = () => {
   const product = useLoaderData();
-  console.log(product);
+
   return (
     <div className="border-l p-4">
       <Typography>Order Summary</Typography>

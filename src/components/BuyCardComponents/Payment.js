@@ -1,11 +1,24 @@
-import React from 'react';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import React from "react";
+import ButtonWrapper from "./ButtonWrapper";
 
 const Payment = () => {
-    return (
-        <div className='min-h-[400px] w-full overflow-auto'>
-            <img className='w-fit h-96 mx-auto' src="https://securepay.sslcommerz.com/stores/invoice-banner/6463_ATT-95f5f94dbb181e35c56b4fe1d095b972-DIS-SCZ100-a2f04745390fd6897d09772b2cd1f581-5fdcab1063bc8.jpg" alt="" />
-        </div>
-    );
+  const currency = "USD";
+  return (
+    <div className="w-full overflow-auto">
+      <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+        <PayPalScriptProvider
+          options={{
+            clientId: "test",
+            components: "buttons",
+            currency: "USD",
+          }}
+        >
+          <ButtonWrapper currency={currency} showSpinner={false} />
+        </PayPalScriptProvider>
+      </div>
+    </div>
+  );
 };
 
 export default Payment;

@@ -51,17 +51,18 @@ const RecipientRegister = () => {
   const handleActiveCard = (data) => {
     setIsLoading(true);
     const newCard = {
-      cardId: data._id,
-      productId: data.productId,
-      userId: user?._id,
-      storeId: data?.storeId,
-      payType: "Offline",
+      card: data._id,
+      title: data?.title,
+      product: data.productId,
+      user: user?._id,
+      store: data?.storeId,
       type: data.type,
       price: data.price,
+      payType: "Offline",
       privateKey: data?.privateKey,
       checkNumber: data?.checkNumber,
-      serialNumber: data?.serialNumber,
       securityCode: data?.securityCode,
+      serialNumber: data?.serialNumber,
     };
 
     if (data?.type === "Wallet") {
@@ -74,7 +75,7 @@ const RecipientRegister = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newCard),
+      body: JSON.stringify([newCard]),
     })
       .then((res) => res.json())
       .then((data) => {
