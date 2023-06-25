@@ -14,6 +14,7 @@ import google from "../../assets/icons/google.png";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import Login from "./Login";
 import { toast } from "react-toastify";
+import EmailVerifyModal from "./EmailVerifyModal";
 
 const items = ["Register", "Login"];
 
@@ -23,13 +24,16 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [openMailModal, setOpenMailModal] = useState(false);
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const [role, setRole] = useState("seller");
+  const [role, setRole] = useState("buyer");
 
   const googleProvider = new GoogleAuthProvider();
   const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
@@ -110,18 +114,23 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data?.success) {
+          setEmail(newUser.email);
+          reset();
+          setOpenMailModal(true);
+        }
         if (data?.message?.emailMessage) {
           openToast("error", data?.message?.emailMessage);
-          setIsLoading(false);
-        }
-        if (data?.token) {
-          localStorage.setItem("wonderboxtoken", data?.token);
-          openToast("success", "User Create Successful");
-          setIsLoading(false);
-          userRefetch();
-          navigate("/home");
         }
         setIsLoading(false);
+        // if (data?.token) {
+        //   localStorage.setItem("wonderboxtoken", data?.token);
+        //   openToast("success", "User Create Successful");
+        //   setIsLoading(false);
+        //   userRefetch();
+        //   navigate("/home");
+        // }
+        // setIsLoading(false);
       });
   };
 
@@ -225,13 +234,13 @@ const Register = () => {
                       id="seller"
                       name="type"
                       label="Seller"
-                      defaultChecked
                     />
                     <Radio
                       onClick={() => setRole("buyer")}
                       id="buyer"
                       name="type"
                       label="Buyer"
+                      defaultChecked
                     />
                   </div>
                 </div>
@@ -299,6 +308,8 @@ const Register = () => {
           )}
         </div>
       </div>
+
+      {openMailModal && <EmailVerifyModal email={email} />}
     </div>
   );
 };

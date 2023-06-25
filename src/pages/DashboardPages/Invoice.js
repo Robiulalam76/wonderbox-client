@@ -1,7 +1,10 @@
-import React from "react";
+import moment from "moment";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../ContextAPI/AuthProvider";
 
 const Invoice = () => {
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
   console.log(data);
   return (
@@ -13,27 +16,31 @@ const Invoice = () => {
             src="https://tailwindflex.com/public/images/logos/favicon-32x32.png"
             alt="Logo"
           />
-          <div class="text-gray-700 font-semibold text-lg">
-            Your Company Name
-          </div>
+          <div class="text-gray-700 font-semibold text-lg">Wonderbox</div>
         </div>
         <div class="text-gray-700">
           <div class="font-bold text-xl mb-2">INVOICE</div>
-          <div class="text-sm">Date: 01/05/2023</div>
-          <div class="text-sm">Invoice #: INV12345</div>
+          <div class="flex items-center gap-2 text-sm">
+            <img className="w-6" src={data?.store?.logo} alt="" />
+            <span>{data?.store?.name}</span>
+          </div>
+          <div class="text-sm">
+            Date: {moment(data.createdAt).format("DD/MMM/YYYY")}
+          </div>
+          <div class="text-sm">Invoice #: {data?.serialNumber}</div>
         </div>
       </div>
       <div class="border-b-2 border-gray-300 pb-8 mb-8">
         <h2 class="text-2xl font-bold mb-4">Bill To:</h2>
-        <div class="text-gray-700 mb-2">John Doe</div>
-        <div class="text-gray-700 mb-2">123 Main St.</div>
-        <div class="text-gray-700 mb-2">Anytown, USA 12345</div>
-        <div class="text-gray-700">johndoe@example.com</div>
+        <div class="text-gray-700 mb-2">{data?.address?.name}</div>
+        <div class="text-gray-700 mb-2">{data?.address?.address}</div>
+        <div class="text-gray-700 mb-2">{data?.address?.area}</div>
+        <div class="text-gray-700">{user?.email}</div>
       </div>
       <table class="w-full text-left mb-8">
         <thead>
           <tr>
-            <th class="text-gray-700 font-bold uppercase py-2">Description</th>
+            <th class="text-gray-700 font-bold uppercase py-2">Title</th>
             <th class="text-gray-700 font-bold uppercase py-2">Quantity</th>
             <th class="text-gray-700 font-bold uppercase py-2">Price</th>
             <th class="text-gray-700 font-bold uppercase py-2">Total</th>
@@ -41,36 +48,24 @@ const Invoice = () => {
         </thead>
         <tbody>
           <tr>
-            <td class="py-4 text-gray-700">Product 1</td>
+            <td class="py-4 text-gray-700">{data?.title}</td>
             <td class="py-4 text-gray-700">1</td>
-            <td class="py-4 text-gray-700">$100.00</td>
-            <td class="py-4 text-gray-700">$100.00</td>
-          </tr>
-          <tr>
-            <td class="py-4 text-gray-700">Product 2</td>
-            <td class="py-4 text-gray-700">2</td>
-            <td class="py-4 text-gray-700">$50.00</td>
-            <td class="py-4 text-gray-700">$100.00</td>
-          </tr>
-          <tr>
-            <td class="py-4 text-gray-700">Product 3</td>
-            <td class="py-4 text-gray-700">3</td>
-            <td class="py-4 text-gray-700">$75.00</td>
-            <td class="py-4 text-gray-700">$225.00</td>
+            <td class="py-4 text-gray-700">${data?.price}</td>
+            <td class="py-4 text-gray-700">${data?.price}</td>
           </tr>
         </tbody>
       </table>
       <div class="flex justify-end mb-8">
         <div class="text-gray-700 mr-2">Subtotal:</div>
-        <div class="text-gray-700">$425.00</div>
+        <div class="text-gray-700">${data?.price}</div>
       </div>
       <div class="text-right mb-8">
         <div class="text-gray-700 mr-2">Tax:</div>
-        <div class="text-gray-700">$25.50</div>
+        <div class="text-gray-700">$0.00</div>
       </div>
       <div class="flex justify-end mb-8">
         <div class="text-gray-700 mr-2">Total:</div>
-        <div class="text-gray-700 font-bold text-xl">$450.50</div>
+        <div class="text-gray-700 font-bold text-xl">${data?.price}</div>
       </div>
       <div class="border-t-2 border-gray-300 pt-8 mb-8">
         <div class="text-gray-700 mb-2">

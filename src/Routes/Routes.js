@@ -23,6 +23,7 @@ import About from "../pages/About/About";
 import Invoice from "../pages/DashboardPages/Invoice";
 import DepositForm from "../pages/DashboardPages/DepositForm";
 import Deposits from "../pages/DashboardPages/Deposits";
+import RegistrationSuccess from "../pages/Login_Register/RegistrationSuccess";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/products/buy/cart-products",
+        element: (
+          <PriveteRoute>
+            <BuyCard></BuyCard>
+          </PriveteRoute>
+        ),
+      },
+      {
         path: "/stores",
         element: <Stores></Stores>,
       },
@@ -79,6 +88,10 @@ const router = createBrowserRouter([
       { path: "/store/products", element: <MyProducts></MyProducts> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
+      {
+        path: "/email-verify/:token",
+        element: <RegistrationSuccess></RegistrationSuccess>,
+      },
     ],
   },
   {

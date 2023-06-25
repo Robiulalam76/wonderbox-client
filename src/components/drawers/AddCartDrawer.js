@@ -6,7 +6,7 @@ import {
 } from "../../Slices/controllerSlice";
 import { AuthContext } from "../../ContextAPI/AuthProvider";
 import { Link } from "react-router-dom";
-import { Drawer } from "@material-tailwind/react";
+import { Button, Drawer } from "@material-tailwind/react";
 
 const AddCartDrawer = () => {
   const { user } = useContext(AuthContext);
@@ -64,7 +64,7 @@ const AddCartDrawer = () => {
                       <img
                         src={product?.product?.images[0]}
                         alt=""
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full object-center"
                       />
                     </Link>
 
@@ -72,7 +72,7 @@ const AddCartDrawer = () => {
                       <div>
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <Link to={`/products/${product?.product?._id}`}>
-                            {product?.product?.title}
+                            {product?.product?.title.slice(0, 25)}
                           </Link>
                           <p className="ml-4">{product?.product?.price}</p>
                         </div>
@@ -116,14 +116,11 @@ const AddCartDrawer = () => {
               <p className="mt-0.5 text-sm text-gray-500">
                 Shipping and taxes calculated at checkout.
               </p>
-              <div className="mt-6">
-                <Link
-                  href="/"
-                  className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-darkPrimary"
-                >
+              <Link to="/products/buy/cart-products" className="mt-6">
+                <Button className="w-full flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-2  font-medium text-xs text-white shadow-sm hover:bg-darkPrimary">
                   Checkout
-                </Link>
-              </div>
+                </Button>
+              </Link>
             </div>
           )}
         </div>

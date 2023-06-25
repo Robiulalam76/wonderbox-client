@@ -1,12 +1,19 @@
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 import ButtonWrapper from "./ButtonWrapper";
+import { Button } from "@material-tailwind/react";
 
-const Payment = () => {
+const Payment = ({ handleOrderByWallet }) => {
   const currency = "USD";
   return (
     <div className="w-full overflow-auto">
-      <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+      <div className="max-w-[700px] w-full mx-auto">
+        <Button
+          onClick={() => handleOrderByWallet("wallet")}
+          className="w-full h-14 rounded shadow-none bg-primary text-xl mb-4"
+        >
+          My Wallet
+        </Button>
         <PayPalScriptProvider
           options={{
             clientId: "test",
@@ -14,7 +21,11 @@ const Payment = () => {
             currency: "USD",
           }}
         >
-          <ButtonWrapper currency={currency} showSpinner={false} />
+          <ButtonWrapper
+            currency={currency}
+            showSpinner={true}
+            handleOrderByWallet={handleOrderByWallet}
+          />
         </PayPalScriptProvider>
       </div>
     </div>

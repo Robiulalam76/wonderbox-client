@@ -25,14 +25,14 @@ const ShippingAddress = () => {
   }, [user?._id]);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 min-h-[500px] w-full overflow-auto">
+    <div className="grid lg:grid-cols-2 gap-8 max-h-[600px] h-fit w-full overflow-auto">
       <div className="">
         <Typography className="uppercase font-bold">
           Shopping Address
         </Typography>
 
         <div className="">
-          <div className="grid grid-cols-1 gap-4 w-full h-fit max-h-[450px]">
+          <div className="grid grid-cols-1 gap-4 w-full h-full">
             {address.length > 0 ? (
               address.map((address, i) => (
                 <SelectAddress key={i} address={address} />

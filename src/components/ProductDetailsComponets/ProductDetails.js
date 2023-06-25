@@ -1,23 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Rating,
-  Option,
-  Select,
-  IconButton,
-} from "@material-tailwind/react";
+import { Typography, Button, Dialog, Rating } from "@material-tailwind/react";
 import SHA256 from "crypto-js/sha256";
 import QRCode from "react-qr-code";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductImages from "./ProductImages";
 
 import bluer from "../../assets/icons/blue-right.png";
@@ -26,15 +12,17 @@ import ProductData from "../Product-View-Components/ProductData";
 import BuyerReview from "../buyer-reviews/BuyerReview";
 import CompanyProfile from "../Company-Profile-Components/company-profile/CompanyProfile";
 import AddCartAndWishlist from "./AddCartAndWishlist";
+import { setBuyProducts } from "../../Slices/productSlice";
 
 const items = ["Product Details", "Company profile", "Buyer Reviews"];
 
 const ProductDetails = () => {
-  const { image } = useSelector((state) => state.productSlice);
+  const { buyProducts } = useSelector((state) => state.productSlice);
   const product = useLoaderData();
   const [open, setOpen] = useState(false);
   const [unique, setUnique] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [selectedData, setSelectedData] = useState("Product Details");
   const [products, setProducts] = useState([]);
@@ -86,11 +74,11 @@ const ProductDetails = () => {
               product?.features.map((feature, i) => <li>{feature}</li>)}
           </div>
 
-          <div className="mt-6">
+          <div className="mt-4">
             <Typography className="font-bold">Description:</Typography>
             <hr />
             <Typography className="font-medium text-gray-600 mt-2">
-              {product?.smallDescription + "..."}
+              {product?.smallDescription?.slice(0, 250) + "..."}
               <a href="#" className="underline text-blue-600">
                 Read More
               </a>
@@ -100,7 +88,7 @@ const ProductDetails = () => {
           <Button
             onClick={() => generateUniqueCode(product)}
             color="green"
-            className="rounded-none mt-8 h-12"
+            className="rounded-none mt-2 h-12"
           >
             Buy Now
           </Button>
@@ -273,7 +261,7 @@ const ProductDetails = () => {
               <hr />
               <Typography className="mt-1 px-2">
                 {product?.smallDescription &&
-                  product?.smallDescription.slice(0, 300)}
+                  product?.smallDescription?.slice(0, 300)}
               </Typography>
             </div>
             <div className="">
@@ -282,7 +270,7 @@ const ProductDetails = () => {
               </Typography>
               <hr />
               <Typography className="mt-1 px-2">
-                {unique.slice(35, 80)}
+                {unique?.slice(35, 80)}
               </Typography>
             </div>
 

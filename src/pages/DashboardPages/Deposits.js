@@ -29,7 +29,7 @@ const Deposits = () => {
     const ready = `&approved=${filterConditions}`;
     try {
       const response = await fetch(
-        `http://localhost:5000/api/transaction/deposits/${
+        `http://localhost:5000/api/transaction/Deposit/${
           user?._id
         }?page=${page}${filter !== "All" && ready}`
       );
@@ -62,7 +62,7 @@ const Deposits = () => {
   return (
     <Fragment>
       <div className="flex justify-between mb-2">
-        <Typography className="mb-4">History</Typography>
+        <Typography className="mb-4">Deposits</Typography>
         <Menu>
           <MenuHandler>
             <Button className="w-32 h-10 outline-none rounded-sm">

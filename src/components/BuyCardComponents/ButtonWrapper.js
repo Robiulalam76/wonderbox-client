@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { useSelector } from "react-redux";
+import { AuthContext } from "../../ContextAPI/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 // This values are the props in the UI
-const amount = "2";
 const style = { layout: "vertical" };
 
-const ButtonWrapper = ({ currency, showSpinner }) => {
+const ButtonWrapper = ({ currency, showSpinner, handleOrderByWallet }) => {
+  const { openToast, user } = useContext(AuthContext);
+  const { totalPrice, cards } = useSelector((state) => state.productSlice);
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch({
@@ -22,10 +27,8 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
     <>
       {showSpinner && isPending && <div className="spinner" />}
       <PayPalButtons
-        style={style}
+        className="w-full"
         disabled={false}
-        forceReRender={[amount, currency, style]}
-        fundingSource={undefined}
         createOrder={(data, actions) => {
           return actions.order
             .create({
@@ -33,19 +36,21 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
                 {
                   amount: {
                     currency_code: currency,
-                    value: amount,
+                    value: totalPrice,
                   },
                 },
               ],
             })
             .then((orderId) => {
-              // Your code here after create the order
+              console.log("order id: ", orderId);
+              // Your code here after creating the order
               return orderId;
             });
         }}
-        onApprove={function (data, actions) {
-          return actions.order.capture().then(function () {
-            // Your code here after capture the order
+        onApprove={(data, actions) => {
+          return actions.order.capture().then((details) => {
+            handleOrderByWallet();
+            console.log(data);
           });
         }}
       />
