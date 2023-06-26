@@ -28,7 +28,7 @@ const AddDeliveryAddressModal = ({ closeModal, getAddress }) => {
       };
 
       // console.log(newData);
-      fetch(`http://localhost:5000/api/address`, {
+      fetch(`${process.env.REACT_APP_API_KEY}/api/address`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

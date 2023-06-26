@@ -22,7 +22,9 @@ const StoreProfile = () => {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/product/store/show-products/${data?._id}`)
+    fetch(
+      `${process.env.REACT_APP_API_KEY}/api/product/store/show-products/${data?._id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

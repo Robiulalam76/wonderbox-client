@@ -37,27 +37,31 @@ const router = createBrowserRouter([
       {
         path: "/product-list/:parent",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/product/cat/${params?.parent}`),
+          fetch(
+            `${process.env.REACT_APP_API_KEY}/api/product/cat/${params?.parent}`
+          ),
         element: <ProductList></ProductList>,
       },
       {
         path: "/product-list/:parent/:children",
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/api/product/cat/${params?.parent}/${params.children}`
+            `${process.env.REACT_APP_API_KEY}/api/product/cat/${params?.parent}/${params.children}`
           ),
         element: <ProductList></ProductList>,
       },
       {
         path: "/products/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/product/${params?.id}`),
+          fetch(`${process.env.REACT_APP_API_KEY}/api/product/${params?.id}`),
         element: <ProductDetails></ProductDetails>,
       },
       {
         path: "/products/:cardId/buy",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/product/${params?.cardId}`),
+          fetch(
+            `${process.env.REACT_APP_API_KEY}/api/product/${params?.cardId}`
+          ),
         element: (
           <PriveteRoute>
             <BuyCard></BuyCard>
@@ -79,7 +83,9 @@ const router = createBrowserRouter([
       {
         path: "/stores/:username",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/store/getInfo/${params?.username}`),
+          fetch(
+            `${process.env.REACT_APP_API_KEY}/api/store/getInfo/${params?.username}`
+          ),
         element: <StoreProfile></StoreProfile>,
       },
 
@@ -108,7 +114,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/orders/:cardId",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/card/${params?.cardId}`),
+          fetch(`${process.env.REACT_APP_API_KEY}/api/card/${params?.cardId}`),
         element: <Invoice />,
       },
       { path: "/dashboard/deposit-wallet", element: <DepositForm /> },

@@ -21,9 +21,9 @@ const Product = () => {
     setIsLoading(true);
     const searchData = search && `&search=${search}`;
     fetch(
-      `http://localhost:5000/api/product/pagination/show?page=${page}${
-        searchData ? searchData : ""
-      }`
+      `${
+        process.env.REACT_APP_API_KEY
+      }/api/product/pagination/show?page=${page}${searchData ? searchData : ""}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -39,7 +39,9 @@ const Product = () => {
 
   const handleTites = (data) => {
     setSearch(data);
-    fetch(`http://localhost:5000/api/product/search/title?search=${search}`)
+    fetch(
+      `${process.env.REACT_APP_API_KEY}/api/product/search/title?search=${search}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSearchTitles(data.data);

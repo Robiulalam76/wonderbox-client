@@ -40,7 +40,7 @@ const Register = () => {
 
   const handleSaveUser = (newUser) => {
     setIsLoadingGoogle(true);
-    fetch(`http://localhost:5000/api/user/signup/withsocial`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/signup/withsocial`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -105,7 +105,7 @@ const Register = () => {
       password: data?.password,
       role: role,
     };
-    fetch(`http://localhost:5000/api/user/register`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

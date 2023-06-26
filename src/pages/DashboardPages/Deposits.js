@@ -29,7 +29,7 @@ const Deposits = () => {
     const ready = `&approved=${filterConditions}`;
     try {
       const response = await fetch(
-        `http://localhost:5000/api/transaction/Deposit/${
+        `${process.env.REACT_APP_API_KEY}/api/transaction/Deposit/${
           user?._id
         }?page=${page}${filter !== "All" && ready}`
       );

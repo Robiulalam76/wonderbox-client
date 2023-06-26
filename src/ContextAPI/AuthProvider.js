@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
   // console.log(user);
   const userRefetch = () => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/user/me`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/me`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("wonderboxtoken")}`,
         "content-type": "application/json",

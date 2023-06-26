@@ -33,8 +33,6 @@ export default function Footer() {
     pathname === "/login" ||
     pathname === "/login/";
 
-  console.log(isExist);
-
   return (
     <>
       {!isExist && (

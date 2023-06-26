@@ -4,7 +4,7 @@ import ProductCard from "../cards/ProductCard";
 const StoerPopularProducts = ({ storeId }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/product/popular/${storeId}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/product/popular/${storeId}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

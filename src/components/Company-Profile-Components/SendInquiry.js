@@ -28,7 +28,7 @@ const SendInquiry = ({ product }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/store/${product?.storeId}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/store/${product?.storeId}`)
       .then((res) => res.json())
       .then((data) => setStore(data));
   }, [product?.storeId]);
@@ -47,7 +47,7 @@ const SendInquiry = ({ product }) => {
 
     console.log(newMessage);
 
-    fetch(`http://localhost:5000/api/storemessage`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/storemessage`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -67,7 +67,7 @@ const SendInquiry = ({ product }) => {
       senderId: user?._id,
       receiverId: store?._id,
     };
-    fetch(`http://localhost:5000/api/storechat`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/storechat`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

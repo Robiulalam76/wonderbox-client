@@ -10,7 +10,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/category/show`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/category/show`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

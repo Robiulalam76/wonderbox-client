@@ -20,7 +20,7 @@ const RegistrationSuccess = () => {
       return;
     }
     setRun(true);
-    fetch(`http://localhost:5000/api/user/verify-to-registration`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/verify-to-registration`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,

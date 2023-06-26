@@ -76,7 +76,7 @@ const BuyerReview = ({ product }) => {
   };
 
   const refetch = () => {
-    fetch(`http://localhost:5000/api/review/${product?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/review/${product?._id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

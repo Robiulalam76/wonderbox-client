@@ -34,7 +34,7 @@ const RecipientRegister = () => {
 
   const handleVerify = (data) => {
     setIsLoading(true);
-    fetch(`http://localhost:5000/api/storecard/verify`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/storecard/verify`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -70,7 +70,7 @@ const RecipientRegister = () => {
     } else {
       newCard["features"] = data.features;
     }
-    fetch(`http://localhost:5000/api/card/createcard_after_verify`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/card/createcard_after_verify`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

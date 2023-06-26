@@ -123,7 +123,7 @@ const BuyCard = () => {
     }
 
     if (newCards) {
-      fetch(`http://localhost:5000/api/card/`, {
+      fetch(`${process.env.REACT_APP_API_KEY}/api/card/`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

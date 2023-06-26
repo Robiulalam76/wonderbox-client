@@ -9,7 +9,7 @@ const MyShoppingAddress = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const getAddress = () => {
-    fetch(`http://localhost:5000/api/address/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/address/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         setAllAddress(data.data);

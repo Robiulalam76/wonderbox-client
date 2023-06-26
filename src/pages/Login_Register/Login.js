@@ -31,7 +31,7 @@ export default function Login() {
 
   const handleSaveUser = (newUser) => {
     setIsLoadingGoogle(true);
-    fetch(`http://localhost:5000/api/user/signup/withsocial`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/signup/withsocial`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -83,7 +83,7 @@ export default function Login() {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    fetch(`http://localhost:5000/api/user/login`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/user/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -8,6 +8,8 @@ import TopRankingProducts from "../../components/HomeComponents/TopRankingProduc
 import PopularProducts from "../../components/HomeComponents/PopularProducts/PopularProducts";
 
 const Home = () => {
+  const lik = process.env.REACT_APP_API_KEY;
+  console.log(lik);
   return (
     <section className="bg-[#fafcfd]">
       <div className="max-w-primary mx-auto px-4 pt-4">

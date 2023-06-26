@@ -26,7 +26,7 @@ const MyOrders = () => {
 
   const fetchOrders = () => {
     fetch(
-      `http://localhost:5000/api/card/getcards/${
+      `${process.env.REACT_APP_API_KEY}/api/card/getcards/${
         user?._id
       }/${selectType}?page=${currentPage ? currentPage : 1}`
     )

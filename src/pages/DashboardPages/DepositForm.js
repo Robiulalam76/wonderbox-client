@@ -40,7 +40,7 @@ const DepositForm = () => {
     }
 
     if (data) {
-      fetch(`http://localhost:5000/api/transaction/deposit`, {
+      fetch(`${process.env.REACT_APP_API_KEY}/api/transaction/deposit`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

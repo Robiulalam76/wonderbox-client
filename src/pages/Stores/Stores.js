@@ -5,7 +5,7 @@ const Stores = () => {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/store`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/store`)
       .then((res) => res.json())
       .then((data) => {
         setStores(data);

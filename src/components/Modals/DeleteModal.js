@@ -4,7 +4,7 @@ import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 
 export default function DeleteModal({ open, close, endpoint, refetch }) {
   const confirm = () => {
-    fetch(`http://localhost:5000/api/${endpoint}`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/${endpoint}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -16,7 +16,7 @@ const WishlistDrawer = () => {
   const dispatch = useDispatch();
 
   const handleGetWishlist = () => {
-    fetch(`http://localhost:5000/api/wishlist/user/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/wishlist/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch(setWishlistProducts(data));
@@ -28,7 +28,7 @@ const WishlistDrawer = () => {
   }, [user?._id]);
 
   const handleWishlistRemove = (id) => {
-    fetch(`http://localhost:5000/api/wishlist/${user?._id}/${id}`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/wishlist/${user?._id}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

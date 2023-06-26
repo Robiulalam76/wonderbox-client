@@ -9,7 +9,7 @@ const PopularProducts = () => {
   const [slidesToShow, setSlidesToShow] = useState(4);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/product/show/all`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/product/show/all`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -114,7 +114,7 @@ const PopularProducts = () => {
 export default PopularProducts;
 
 // useEffect(() => {
-//   fetch(`http://localhost:5000/api/product/popular/products/all`)
+//   fetch(`${process.env.REACT_APP_API_KEY}/api/product/popular/products/all`)
 //     .then((res) => res.json())
 //     .then((data) => {
 //       setProducts(data);

@@ -16,7 +16,7 @@ const AddCartDrawer = () => {
   const dispatch = useDispatch();
 
   const handleGetAddCart = () => {
-    fetch(`http://localhost:5000/api/addcart/user/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/addcart/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch(setAddCartProducts(data));
@@ -28,7 +28,7 @@ const AddCartDrawer = () => {
   }, [user?._id]);
 
   const handleCartRemove = (id) => {
-    fetch(`http://localhost:5000/api/addcart/${user?._id}/${id}`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/addcart/${user?._id}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

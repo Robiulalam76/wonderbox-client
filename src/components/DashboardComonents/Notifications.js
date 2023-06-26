@@ -58,7 +58,7 @@ const Notifications = () => {
 
   useEffect(() => {
     setIsloading(true);
-    fetch(`http://localhost:5000/api/notification/user/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/notification/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         setNotifications(data);

@@ -47,7 +47,7 @@ const AddCartAndWishlist = ({ product }) => {
   const dispatch = useDispatch();
 
   const handleGetWishlist = () => {
-    fetch(`http://localhost:5000/api/wishlist/user/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/wishlist/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch(setWishlistProducts(data));
@@ -59,7 +59,7 @@ const AddCartAndWishlist = ({ product }) => {
       userId: user?._id,
       product: id,
     };
-    fetch(`http://localhost:5000/api/wishlist`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/wishlist`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -75,7 +75,7 @@ const AddCartAndWishlist = ({ product }) => {
   };
 
   const handleWishlistRemove = (id) => {
-    fetch(`http://localhost:5000/api/wishlist/${user?._id}/${id}`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/wishlist/${user?._id}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -93,7 +93,7 @@ const AddCartAndWishlist = ({ product }) => {
 
   // ----------- add cart ------------
   const handleGetAddCart = () => {
-    fetch(`http://localhost:5000/api/addcart/user/${user?._id}`)
+    fetch(`${process.env.REACT_APP_API_KEY}/api/addcart/user/${user?._id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch(setAddCartProducts(data));
@@ -122,7 +122,7 @@ const AddCartAndWishlist = ({ product }) => {
         userId: user?._id,
         product: id,
       };
-      fetch(`http://localhost:5000/api/addcart`, {
+      fetch(`${process.env.REACT_APP_API_KEY}/api/addcart`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
