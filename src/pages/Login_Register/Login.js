@@ -77,7 +77,7 @@ export default function Login() {
       })
       .catch((err) => {
         openToast("error", "Something Went Wrong !");
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -100,6 +100,7 @@ export default function Login() {
         }
         if (data.token) {
           localStorage.setItem("wonderboxtoken", data.token);
+          userRefetch();
           navigate("/home");
         }
         setIsLoading(false);
