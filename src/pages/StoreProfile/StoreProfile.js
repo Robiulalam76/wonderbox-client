@@ -32,10 +32,10 @@ const StoreProfile = () => {
   }, [data?._id]);
 
   return (
-    <div className="max-w-primary px-4 mx-auto min-h-screen">
+    <div className="max-w-primary md:px-4 mx-auto min-h-screen">
       <div className="relative">
         <img
-          className="w-full h-36 md:h-72 object-fill"
+          className="w-full h-32 md:h-72 object-fill"
           src="https://t3.ftcdn.net/jpg/02/62/18/46/360_F_262184611_bXhmboL9oE6k2ILu4qXxNWFhNJCEbTn2.jpg"
           alt=""
         />
@@ -75,7 +75,7 @@ const StoreProfile = () => {
 
       <div className="mt-6">
         <Typography className="h2">{selectedTab?.title}</Typography>
-        <div className="mt-6">
+        <div className="mt-6 relative">
           {selectedTab?.id === "1" && <StoreHome products={products} />}
           {selectedTab?.id === "2" && (
             <StoerPopularProducts storeId={data?._id} />

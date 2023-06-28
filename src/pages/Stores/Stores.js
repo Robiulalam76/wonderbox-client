@@ -8,6 +8,7 @@ const Stores = () => {
     fetch(`${process.env.REACT_APP_API_KEY}/api/store`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setStores(data);
       });
   }, []);

@@ -63,7 +63,7 @@ const DepositForm = () => {
     }
   };
   return (
-    <section className="max-w-primary mx-auto px-4">
+    <section className="max-w-primary mx-auto md:px-4">
       <div className="max-w-[800px] mx-auto p-4 bg-white rounded-md">
         <div className="flex flex-col justify-center items-center gap-1">
           <img className="w-16 mx-auto rounded-full" src={logo} alt="" />

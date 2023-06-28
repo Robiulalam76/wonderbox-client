@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 
 export default function HistoryTableRow({ data }) {
   const [open, setOpen] = useState(false);
+  // console.log(data);
 
   return (
     <tr className="w-full py-4 bg-blue-gray-50 border-b border-white">

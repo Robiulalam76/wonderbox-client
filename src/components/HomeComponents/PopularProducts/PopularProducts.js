@@ -33,8 +33,12 @@ const PopularProducts = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      if (window.innerWidth < 800) {
         setSlidesToShow(1);
+      } else if (window.innerWidth < 1040) {
+        setSlidesToShow(2);
+      } else if (window.innerWidth < 1240) {
+        setSlidesToShow(3);
       } else {
         setSlidesToShow(4);
       }

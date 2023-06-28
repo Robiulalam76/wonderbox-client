@@ -16,7 +16,7 @@ module.exports = withMT({
         darkPrimary: "#0624c2",
       },
       maxWidth: {
-        primary: "1480px",
+        primary: "1490px",
       },
     },
     // fontFamily: {

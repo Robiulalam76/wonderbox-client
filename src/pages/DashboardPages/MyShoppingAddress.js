@@ -26,7 +26,7 @@ const MyShoppingAddress = () => {
 
   return (
     <div>
-      <h1 className="text-primary font-bold text-left uppercase">
+      <h1 className="text-primary font-bold text-left uppercase mt-2">
         Shopping Address
       </h1>
 

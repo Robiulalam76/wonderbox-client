@@ -76,16 +76,16 @@ const MyOrders = () => {
               </Button>
             ))}
           </div>
-          <div className="w-full md:w-72">
+          {/* <div className="w-full md:w-72">
             <Input
               label="Search"
               icon={<MagnifyingGlassIcon className="h-5 w-5" />}
             />
-          </div>
+          </div> */}
         </div>
       </CardHeader>
 
-      <table className="w-full text-left mt-4">
+      <table className="w-full text-left mt-4 overflow-x-auto">
         <thead>
           <tr>
             <th className="bg-blue-500 p-4 text-left text-white">

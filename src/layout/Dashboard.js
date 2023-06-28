@@ -11,7 +11,7 @@ const Dashboard = () => {
         <DashboardDrawer open={open} />
         <div className="flex-grow">
           <DashboardNavber open={open} setOpen={setOpen} />
-          <div className="px-4 py-4 w-full max-h-screen overflow-y-auto scrollBar">
+          <div className="md:px-4 md:py-4 w-full max-h-screen overflow-y-auto scrollBar">
             <Outlet />
           </div>
         </div>

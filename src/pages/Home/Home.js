@@ -10,7 +10,7 @@ import PopularProducts from "../../components/HomeComponents/PopularProducts/Pop
 const Home = () => {
   return (
     <section className="bg-[#fafcfd]">
-      <div className="max-w-primary mx-auto px-4 pt-4">
+      <div className="max-w-primary mx-auto px-4 pt-4 overflow-hidden">
         <Banner />
         <LatestProducts />
         {/* <Product /> */}

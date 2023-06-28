@@ -88,7 +88,7 @@ const RecipientRegister = () => {
     <div>
       <form
         onSubmit={handleSubmit(handleVerify)}
-        className="w-full md:w-[800px] mx-auto bg-white h-full md:p-6"
+        className="w-full md:w-[800px] mx-auto bg-white h-full p-2 md:p-6"
       >
         <Typography className="text-xl text-center">
           <strong>Register</strong> your gift
